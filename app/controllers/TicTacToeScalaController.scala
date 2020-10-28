@@ -7,7 +7,7 @@ import de.htwg.se.ticTacToe3D.TicTacToe
 @Singleton
 class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   val gameController = TicTacToe.controller
-  def tictactoeAsText =  gameController.toString + gameController.statusMessage
+  // def tictactoeAsText =  gameController.toString + gameController.statusMessage
 
   /**
    * the About Page
@@ -22,7 +22,7 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
    * @return the TUI + Status message
    */
   def tictactoe = Action {
-    Ok(tictactoeAsText)
+    Ok(views.html.tictactoe(gameController))
   }
 
   /**
@@ -33,7 +33,7 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
    */
   def players(player1: String, player2: String) = Action {
     gameController.setPlayers(player1, player2)
-    Ok(tictactoeAsText)
+    Ok(views.html.tictactoe(gameController))
   }
 
   /**
@@ -46,7 +46,7 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
       case row :: column :: grid :: Nil => gameController.setValue(row, column, grid)
       case _ => None
     }
-    Ok(tictactoeAsText)
+    Ok(views.html.tictactoe(gameController))
   }
 
   /**
@@ -55,7 +55,7 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
    */
   def reset = Action {
     gameController.reset
-    Ok(tictactoeAsText)
+    Ok(views.html.tictactoe(gameController))
   }
 
   /**
@@ -64,7 +64,7 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
    */
   def restart = Action {
     gameController.restart
-    Ok(tictactoeAsText)
+    Ok(views.html.tictactoe(gameController))
   }
 
 }
