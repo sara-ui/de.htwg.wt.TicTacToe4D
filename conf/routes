@@ -12,7 +12,7 @@ GET     /reset                      controllers.TicTacToeScalaController.reset
 
 GET     /restart                     controllers.TicTacToeScalaController.restart
 
-GET     /players/:player1/:player2  controllers.TicTacToeScalaController.players(player1: String, player2: String)
+GET     /players                     controllers.TicTacToeScalaController.players(player1: String, player2: String)
 
 GET     /move/:step                 controllers.TicTacToeScalaController.move(step: String)
 

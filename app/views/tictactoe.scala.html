@@ -1,49 +1,19 @@
 @(gameController: de.htwg.se.ticTacToe3D.controller.controllerComponent.ControllerInterface)
 @main("HTWG TicTacToe") {
-    @*  Status message vom game   *@
     <div class="infos">
         @{ gameController.statusMessage }
     </div>
-    <div class="gamecontainer"> @* style="display: flex" *@
-        @* The game *@
-        <div class="game">
-            @for(gridIndex <- gameController.game.grids.indices) {
-                <table class="grid">
-                @for(row <- gameController.game.grids(gridIndex).cells.indices) {
-                    <tr class="row">
-                    @for(col <- gameController.game.grids(gridIndex).cells(row).indices) {
-                        <td class="col">
-                            @{
-                                if(gameController.game.grids(gridIndex).cell(row, col).isSet) {
-                                    "_" + gameController.game.grids(gridIndex).cell(row, col).toString + "_"
-                                } else
-                                    "___"
-                            }
-                        </td>
-                    }
-                    </tr>
-                }
-                </table>
-                <br>
+    <br><br>
+    <div class="gamecontainer" >
+        @{
+            if(gameController.game.players.contains(null)
+                    || "".equals(gameController.game.players(0).name)
+                    || "".equals(gameController.game.players(1).name)) {
+                registerForm()
+            } else {
+                game(gameController)
             }
-        </div>
-        @* the instructions *@
-        <div class="game">
-            @for(gridIndex <- gameController.game.grids.indices) {
-                <table class="grid">
-                @for(row <- gameController.game.grids(gridIndex).cells.indices) {
-                    <tr class="row">
-                    @for(col <- gameController.game.grids(gridIndex).cells(row).indices) {
-                        <td class="col">
-                            @{"" + row + col + gridIndex}
-                        </td>
-                    }
-                    </tr>
-                }
-                </table>
-                <br>
-            }
-        </div>
+        }
     </div>
 }
 

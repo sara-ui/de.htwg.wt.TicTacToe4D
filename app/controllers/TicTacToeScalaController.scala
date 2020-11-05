@@ -55,7 +55,7 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
    */
   def reset = Action {
     gameController.reset
-    Ok(views.html.tictactoe(gameController))
+    Redirect(controllers.routes.TicTacToeScalaController.tictactoe());
   }
 
   /**
@@ -64,7 +64,7 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
    */
   def restart = Action {
     gameController.restart
-    Ok(views.html.tictactoe(gameController))
+    Redirect(controllers.routes.TicTacToeScalaController.tictactoe());
   }
 
 }
