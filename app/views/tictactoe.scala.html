@@ -8,6 +8,9 @@
         }
     </div>
     <div class="statusMessage">
+        <div id="statusMessageHeader">
+            Status Message:
+        </div>
         @{ gameController.statusMessage }
     </div>
     <br><br>
@@ -26,8 +29,8 @@
         @if(!(gameController.game.players.contains(null)
                 || "".equals(gameController.game.players(0).name)
                 || "".equals(gameController.game.players(1).name))) {
-            <button id="resetButton" onclick="location.href='/reset'"> RESTART NEW </button>
-            <button id="restartButton" onclick="location.href='/restart'"> RESTART SAME </button>
+            <button id="resetButton" onclick="location.href='/reset'"> Restart with NEW Players </button>
+            <button id="restartButton" onclick="location.href='/restart'"> Restart with SAME Players</button>
         }
     </div>
 
