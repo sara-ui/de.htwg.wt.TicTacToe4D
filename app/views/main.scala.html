@@ -10,22 +10,27 @@
 <html lang="en">
     <head>
         <div class="header">
-            <input id="logo" type="image" alt="Home Page" src="@routes.Assets.versioned("images/TicTacToe4D_TransparentFixed.png")" onclick="location.href='/'">
+            <a class="header__button" href="/">
+                        <span>HOME</span>
+            </a>
+            <!--
+            <input class="header__logo" type="image" alt="Home Page" src=outes.Assets.versioned("images/TicTacToe4D_TransparentFixed.png")" onclick="location.href='/'">
+
+                -->
             @* Not implemented yet *@
-            <div class="headerMiddle">
-                <button id="headerButton">
+            <div class="header__middle">
+                <!--
+                <button class="button">
                     REDO
                 </button>
-                <button id="headerButton">
+                <button class="button">
                     UNDO
                 </button>
+                -->
             </div>
-            <div class="headerRightSide">
-                @* Can also do other Functions, not yet decided (STC) *@
-                <button id="headerButton" onclick="location.href='/about'">
-                        ABOUT
-                </button>
-            </div>
+            <a class="header__button" href="/about">
+                        <span>ABOUT</span>
+            </a>
         </div>
         @* Here's where we render the page title `String`. *@
     <title>@title</title>
@@ -37,7 +42,7 @@
     <body class="gameBody">
         @* And here's where we render the `Html` object containing
         * the page content. *@
-        <div class="gameBodyWrapper">
+        <div class="gameBody__wrapper">
             @content
         </div>
     </body>

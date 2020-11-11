@@ -1,21 +1,20 @@
 @(gameController: de.htwg.se.ticTacToe3D.controller.controllerComponent.ControllerInterface)
 
-<div class="gameContainer">
+<div class="game__container">
 @for(gridIndex <- gameController.game.grids.indices) {
     <table class="grid">
     @for(row <- gameController.game.grids(gridIndex).cells.indices) {
         <tr class="row">
         @for(col <- gameController.game.grids(gridIndex).cells(row).indices) {
-            <td class="col">
             @if(gameController.game.grids(gridIndex).cell(row, col).isSet) {
                 @if(gameController.game.grids(gridIndex).cell(row, col).toString == "X") {
-                    <span id="setPlayer1"> _@{gameController.game.grids(gridIndex).cell(row, col).toString}_ </span>
+                    <td class="col col__player1">
                 } else {
-                    <span id="setPlayer2"> _@{gameController.game.grids(gridIndex).cell(row, col).toString}_ </span>
+                    <td class="col col__player2">
                 }
             } else {
+                <td class="col">
                 <a id="notSet" href="/move/@row@col@gridIndex">
-                    ___
                 </a>
             }
             </td>
@@ -23,6 +22,5 @@
         </tr>
     }
     </table>
-    <br>
     }
 </div>

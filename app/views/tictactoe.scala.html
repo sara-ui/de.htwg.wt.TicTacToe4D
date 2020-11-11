@@ -13,7 +13,6 @@
         </div>
         @{ gameController.statusMessage }
     </div>
-    <br><br>
     <div class="game" >
     @{
         if(gameController.game.players.contains(null)
@@ -29,8 +28,8 @@
         @if(!(gameController.game.players.contains(null)
                 || "".equals(gameController.game.players(0).name)
                 || "".equals(gameController.game.players(1).name))) {
-            <button id="resetButton" onclick="location.href='/reset'"> Restart with NEW Players </button>
-            <button id="restartButton" onclick="location.href='/restart'"> Restart with SAME Players</button>
+            <a class="button" href="/reset"> Restart with NEW Players </a>
+            <a class="button" href="/restart"> Restart with SAME Players</a>
         }
     </div>
 
