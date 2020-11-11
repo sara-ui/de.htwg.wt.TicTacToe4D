@@ -1,20 +1,36 @@
 @(gameController: de.htwg.se.ticTacToe3D.controller.controllerComponent.ControllerInterface)
 @main("HTWG TicTacToe") {
-    <div class="infos">
+    <div>
+        @if(gameController.game.players.contains(null)
+        || "".equals(gameController.game.players(0).name)
+        || "".equals(gameController.game.players(1).name)) {
+            <h1 style="margin-left: 20px">Home</h1>
+        }
+    </div>
+    <div class="statusMessage">
         @{ gameController.statusMessage }
     </div>
     <br><br>
-    <div class="gamecontainer" >
-        @{
-            if(gameController.game.players.contains(null)
-                    || "".equals(gameController.game.players(0).name)
-                    || "".equals(gameController.game.players(1).name)) {
-                registerForm()
-            } else {
-                game(gameController)
-            }
+    <div class="game" >
+    @{
+        if(gameController.game.players.contains(null)
+                || "".equals(gameController.game.players(0).name)
+                || "".equals(gameController.game.players(1).name)) {
+            registerForm()
+        } else {
+            game(gameController)
+        }
+    }
+    </div>
+    <div class="gameButtons">
+        @if(!(gameController.game.players.contains(null)
+                || "".equals(gameController.game.players(0).name)
+                || "".equals(gameController.game.players(1).name))) {
+            <button id="resetButton" onclick="location.href='/reset'"> RESTART NEW </button>
+            <button id="restartButton" onclick="location.href='/restart'"> RESTART SAME </button>
         }
     </div>
+
 }
 
 

@@ -1,6 +1,6 @@
 @(gameController: de.htwg.se.ticTacToe3D.controller.controllerComponent.ControllerInterface)
 
-<div class="game">
+<div class="gameContainer">
 @for(gridIndex <- gameController.game.grids.indices) {
     <table class="grid">
     @for(row <- gameController.game.grids(gridIndex).cells.indices) {
@@ -8,9 +8,13 @@
         @for(col <- gameController.game.grids(gridIndex).cells(row).indices) {
             <td class="col">
             @if(gameController.game.grids(gridIndex).cell(row, col).isSet) {
-                _@{gameController.game.grids(gridIndex).cell(row, col).toString}_
+                @if(gameController.game.grids(gridIndex).cell(row, col).toString == "X") {
+                    <span id="setPlayer1"> _@{gameController.game.grids(gridIndex).cell(row, col).toString}_ </span>
+                } else {
+                    <span id="setPlayer2"> _@{gameController.game.grids(gridIndex).cell(row, col).toString}_ </span>
+                }
             } else {
-                <a href="/move/@row@col@gridIndex">
+                <a id="notSet" href="/move/@row@col@gridIndex">
                     ___
                 </a>
             }
@@ -22,6 +26,3 @@
     <br>
     }
 </div>
-<a href="/reset">Reset the game and start new</a>
-<br><br>
-<a href="/restart">Reset and Replay with same players</a>

@@ -9,6 +9,25 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <div class="header">
+            <input id="logo" type="image" alt="Home Page" src="@routes.Assets.versioned("images/TicTacToe4D_TransparentFixed.png")" onclick="location.href='/'">
+            @* Only show these, when in Game -> not when on Starting Site/About Site etc. *@
+            <div class="headerMiddle">
+                <button id="headerButton">
+                    REDO
+                </button>
+                <button id="headerButton">
+                    UNDO
+                </button>
+            </div>
+            <div class="headerRightSide">
+                @* Can also do other Functions, not yet decided (STC) *@
+
+                <button id="headerButton" onclick="location.href='/about'">
+                        ABOUT
+                </button>
+            </div>
+        </div>
         @* Here's where we render the page title `String`. *@
     <title>@title</title>
     <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
@@ -19,6 +38,8 @@
     <body class="gameBody">
         @* And here's where we render the `Html` object containing
         * the page content. *@
-        @content
+        <div class="gameBodyWrapper">
+            @content
+        </div>
     </body>
 </html>
