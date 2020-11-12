@@ -8,9 +8,9 @@
         @for(col <- gameController.game.grids(gridIndex).cells(row).indices) {
             @if(gameController.game.grids(gridIndex).cell(row, col).isSet) {
                 @if(gameController.game.grids(gridIndex).cell(row, col).toString == "X") {
-                    <td class="col col__player1">
+                    <td class="col col__player1"> X </td>
                 } else {
-                    <td class="col col__player2">
+                    <td class="col col__player2"> O </td>
                 }
             } else {
                 <td class="col">
