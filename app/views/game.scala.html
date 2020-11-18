@@ -2,15 +2,15 @@
 
 <div class="game__container">
 @for(gridIndex <- gameController.game.grids.indices) {
-    <table class="grid">
+    <table class="grid table w-auto">
     @for(row <- gameController.game.grids(gridIndex).cells.indices) {
         <tr class="row">
         @for(col <- gameController.game.grids(gridIndex).cells(row).indices) {
             @if(gameController.game.grids(gridIndex).cell(row, col).isSet) {
                 @if(gameController.game.grids(gridIndex).cell(row, col).toString == "X") {
-                    <td class="col col__player1"> X </td>
+                    <td class="col col__player1"> </td>
                 } else {
-                    <td class="col col__player2"> O </td>
+                    <td class="col col__player2"> </td>
                 }
             } else {
                 <td class="col">
