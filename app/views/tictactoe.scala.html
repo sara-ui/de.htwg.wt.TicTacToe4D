@@ -7,7 +7,7 @@
                 || "".equals(gameController.game.players(0).name)
                 || "".equals(gameController.game.players(1).name)) {
                     <div class="gameLogo">
-                        <img alt="HomePage" id="gameLogoImage" src="@routes.Assets.versioned("images/TicTacToe4D_Transparent.png")">
+                        <img class="img-fluid" alt="HomePage" id="gameLogoImage" src="@routes.Assets.versioned("images/TicTacToe4D_Transparent.png")">
                     </div>
                 }
             </div>
@@ -60,7 +60,7 @@
                 <div class="col">
                     <div class="btn-group" role="group" aria-label="First group">
                         <a class="btn btn-labeled btn-secondary" href="/reset" role="button">
-                            <span class="btn-label"><img class="btn-label__restart text-white" src="/assets/icons/bootstrap-icons-1.1.0/arrow-repeat.svg" alt="" width="25" height="25"></span>
+                            <span class="btn-label"><img class="btn-label__restart text-white" src="/assets/icons/bootstrap-icons-1.1.0/arrow-repeat.svg" alt=""></span>
                             Restart with NEW Players
                         </a>
                     </div>
@@ -68,11 +68,11 @@
                 <div class="col">
                     <div class="btn-group" role="group" aria-label="Second group">
                         <a class="btn btn-labeled btn-info" href="/undo" role="button">
-                            <span class="btn-label"><img class="btn-label__restart text-white" src="/assets/icons/bootstrap-icons-1.1.0/arrow-return-left.svg" alt="" width="25" height="25"></span>
+                            <span class="btn-label"><img class="btn-label__restart text-white" src="/assets/icons/bootstrap-icons-1.1.0/arrow-return-left.svg" alt=""></span>
                             Undo
                         </a>
                         <a style="margin-left: 12px" class="btn btn-labeled btn-info" href="/redo" role="button">
-                            <span class="btn-label"><img class="btn-label__restart text-white" src="/assets/icons/bootstrap-icons-1.1.0/arrow-return-right.svg" alt="" width="25" height="25"></span>
+                            <span class="btn-label"><img class="btn-label__restart text-white" src="/assets/icons/bootstrap-icons-1.1.0/arrow-return-right.svg" alt=""></span>
                             Redo
                         </a>
                     </div>
@@ -80,7 +80,7 @@
                 <div class="col">
                     <div class="btn-group" role="group" aria-label="Third group">
                         <a class="btn btn-labeled btn-secondary" href="/restart" role="button">
-                            <span class="btn-label"><img class="btn-label__redo__restart text-white" src="/assets/icons/bootstrap-icons-1.1.0/arrow-counterclockwise.svg" alt="" width="25" height="25"></span>
+                            <span class="btn-label"><img class="btn-label__restart text-white" src="/assets/icons/bootstrap-icons-1.1.0/arrow-counterclockwise.svg" alt=""></span>
                             Restart with SAME Players
                         </a>
                     </div>
