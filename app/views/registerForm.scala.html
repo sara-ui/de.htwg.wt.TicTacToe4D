@@ -1,8 +1,19 @@
-<form action="/players" method="get">
-    <label for="player1">First Player:</label>
-    <input type="text" id="player1" name="player1" required><br><br>
-    <label for="player2">Second Player:</label>
-    <input type="text" id="player2" name="player2" required><br><br>
-    <input id="startGame" type="submit" value="Start Game!">
-    <br><br>
+<form class="enterPlayers" action="/players" method="get">
+    <div class="enterPlayer1 form-group row">
+        <label for="player1" class="enterPlayer1__label col-sm-2 col-form-label"> Player 1:</label>
+        <div class="col-sm-4 enterPlayer1__input">
+            <input type="text" name="player1" class="enterPlayer1__input__form form-control" id="player1" placeholder="e.g.: Max" required>
+        </div>
+    </div>
+    <div class="enterPlayer2 form-group row">
+        <label for="player2" class="enterPlayer2__label col-sm-2 col-form-label"> Player 2:</label>
+        <div class="col-sm-4 enterPlayer2__input">
+            <input type="text" name="player2" class="enterPlayer1__input__form form-control" id="player2" placeholder="e.g.: Moritz" required>
+        </div>
+    </div>
+    <div class="startGame form-group row">
+        <div class="startGame__container col-sm-4">
+            <button type="submit" class="startGame__container__button btn btn-info" role="button">Start Game!</button>
+        </div>
+    </div>
 </form>

@@ -9,33 +9,43 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <div class="header">
-            <a class="header__button" href="/">
-                        <span>HOME</span>
-            </a>
-            <!--
-            <input class="header__logo" type="image" alt="Home Page" src=outes.Assets.versioned("images/TicTacToe4D_TransparentFixed.png")" onclick="location.href='/'">
-
-                -->
-            @* Not implemented yet *@
-            <div class="header__middle">
-                <!--
-                <button class="button">
-                    REDO
-                </button>
-                <button class="button">
-                    UNDO
-                </button>
-                -->
+        <nav class="navbar navbar-expand-lg navbar-nav">
+            <div class="btn-group navbar__group1">
+                <p class="navbar__text font-weight-bold">
+                    TicTacToe4D
+                </p>
+                <a class="navbar__group1__button btn btn-secondary" href="/" role="button">
+                    Home
+                </a>
+                <a class="navbar__group1__button btn btn-secondary" href="/" role="button">
+                    Play
+                </a>
+                <a class="navbar__group1__button btn btn-secondary" href="/about" role="button">
+                    About
+                </a>
             </div>
-            <a class="header__button" href="/about">
-                        <span>ABOUT</span>
-            </a>
-        </div>
+            <div class="collapse navbar-collapse navbar__collapse" id="navbarSupportedContent">
+                <div class="btn-group navbar__group1">
+                    <p class="navbar__text font-weight-bold">
+                        Version 0.5
+                    </p>
+                </div>
+            </div>
+        </nav>
         @* Here's where we render the page title `String`. *@
     <title>@title</title>
-    <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+
+    <!-- Bootstrap CSS -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")" >
+
+    <script src="@routes.Assets.versioned("javascripts/popper.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.versioned("javascripts/jquery-3.2.1.min.js")" type="text/javascript"></script>
     <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")" ></script>
+
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
     <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")"/>
 
     </head>

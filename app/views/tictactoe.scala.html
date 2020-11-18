@@ -1,36 +1,93 @@
 @(gameController: de.htwg.se.ticTacToe3D.controller.controllerComponent.ControllerInterface)
 @main("HTWG TicTacToe") {
-    <div>
-        @if(gameController.game.players.contains(null)
-        || "".equals(gameController.game.players(0).name)
-        || "".equals(gameController.game.players(1).name)) {
-            <h1 style="margin-left: 20px">Home</h1>
-        }
-    </div>
-    <div class="statusMessage">
-        <div id="statusMessageHeader">
-            Status Message:
-        </div>
-        @{ gameController.statusMessage }
-    </div>
-    <div class="game" >
-    @{
-        if(gameController.game.players.contains(null)
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div>
+                @if(gameController.game.players.contains(null)
                 || "".equals(gameController.game.players(0).name)
                 || "".equals(gameController.game.players(1).name)) {
-            registerForm()
-        } else {
-            game(gameController)
-        }
-    }
-    </div>
-    <div class="gameButtons">
-        @if(!(gameController.game.players.contains(null)
-                || "".equals(gameController.game.players(0).name)
-                || "".equals(gameController.game.players(1).name))) {
-            <a class="button" href="/reset"> Restart with NEW Players </a>
-            <a class="button" href="/restart"> Restart with SAME Players</a>
-        }
+                    <div class="gameLogo">
+                        <img alt="HomePage" id="gameLogoImage" src="@routes.Assets.versioned("images/TicTacToe4D_Transparent.png")">
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div>
+            @if(!(gameController.game.players.contains(null)
+                    || "".equals(gameController.game.players(0).name)
+                    || "".equals(gameController.game.players(1).name))) {
+                @if(gameController.won(0) || gameController.won(1)) {
+                    <div class="statusMessage alert alert-success">
+                        <div class="statusMessage__header">
+                            GAME OVER!
+                        </div>
+                        @{
+                            gameController.statusMessage
+                        }
+                    </div>
+                } else {
+                    <div class="statusMessage alert alert-info">
+                        <div class="statusMessage__header">
+                            Status Message:
+                        </div>
+                        @{
+                            gameController.statusMessage
+                        }
+                    </div>
+                }
+            }
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="game" >
+            @{
+                if(gameController.game.players.contains(null)
+                        || "".equals(gameController.game.players(0).name)
+                        || "".equals(gameController.game.players(1).name)) {
+                    registerForm()
+                } else {
+                    game(gameController)
+                }
+            }
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="gameButtons btn-toolbar" role="group" aria-label="In game Actions">
+            @if(!(gameController.game.players.contains(null)
+                    || "".equals(gameController.game.players(0).name)
+                    || "".equals(gameController.game.players(1).name))) {
+                <div class="col">
+                    <div class="btn-group" role="group" aria-label="First group">
+                        <a class="btn btn-labeled btn-secondary" href="/reset" role="button">
+                            <span class="btn-label"><img class="btn-label__restart text-white" src="/assets/icons/bootstrap-icons-1.1.0/arrow-repeat.svg" alt="" width="25" height="25"></span>
+                            Restart with NEW Players
+                        </a>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="btn-group" role="group" aria-label="Second group">
+                        <a class="btn btn-labeled btn-info" href="/undo" role="button">
+                            <span class="btn-label"><img class="btn-label__restart text-white" src="/assets/icons/bootstrap-icons-1.1.0/arrow-return-left.svg" alt="" width="25" height="25"></span>
+                            Undo
+                        </a>
+                        <a style="margin-left: 12px" class="btn btn-labeled btn-info" href="/redo" role="button">
+                            <span class="btn-label"><img class="btn-label__restart text-white" src="/assets/icons/bootstrap-icons-1.1.0/arrow-return-right.svg" alt="" width="25" height="25"></span>
+                            Redo
+                        </a>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="btn-group" role="group" aria-label="Third group">
+                        <a class="btn btn-labeled btn-secondary" href="/restart" role="button">
+                            <span class="btn-label"><img class="btn-label__redo__restart text-white" src="/assets/icons/bootstrap-icons-1.1.0/arrow-counterclockwise.svg" alt="" width="25" height="25"></span>
+                            Restart with SAME Players
+                        </a>
+                    </div>
+                </div>
+            }
+            </div>
+        </div>
     </div>
 
 }

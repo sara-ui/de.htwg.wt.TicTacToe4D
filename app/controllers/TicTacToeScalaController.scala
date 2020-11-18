@@ -67,4 +67,22 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
     Redirect(controllers.routes.TicTacToeScalaController.tictactoe());
   }
 
+  /**
+   * redo the last step
+   * @return TUI + status message
+   */
+  def redo = Action {
+    gameController.redo
+    Redirect(controllers.routes.TicTacToeScalaController.tictactoe());
+  }
+
+  /**
+   * undo the the last step
+   * @return TUI + status message
+   */
+  def undo = Action {
+    gameController.undo
+    Redirect(controllers.routes.TicTacToeScalaController.tictactoe());
+  }
+
 }

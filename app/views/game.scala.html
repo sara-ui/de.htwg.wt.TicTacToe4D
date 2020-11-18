@@ -14,10 +14,13 @@
                 }
             } else {
                 <td class="col">
-                <a id="notSet" href="/move/@row@col@gridIndex">
-                </a>
+                    @if(!gameController.won(0) && !gameController.won(1)) {
+                        <a id="notSet" href="/move/@row@col@gridIndex">
+                        </a>
+                    }
+                </td>
             }
-            </td>
+
         }
         </tr>
     }
