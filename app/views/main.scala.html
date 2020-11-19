@@ -4,34 +4,11 @@
 * two arguments, a `String` for the title of the page and an `Html`
 * object to insert into the body of the page.
 *@
-@(title: String)(content: Html)
+@(title: String, gameController: de.htwg.se.ticTacToe3D.controller.controllerComponent.ControllerInterface)(content: Html)
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
     <head>
-        <nav class="navbar navbar-expand-lg navbar-nav">
-            <div class="btn-group navbar__group1">
-                <p class="navbar__text font-weight-bold">
-                    TicTacToe4D
-                </p>
-                <a class="navbar__group1__button btn btn-secondary" href="/" role="button">
-                    Home
-                </a>
-                <a class="navbar__group1__button btn btn-secondary" href="/" role="button">
-                    Play
-                </a>
-                <a class="navbar__group1__button btn btn-secondary" href="/about" role="button">
-                    About
-                </a>
-            </div>
-            <div class="collapse navbar-collapse navbar__collapse" id="navbarSupportedContent">
-                <div class="btn-group navbar__group1">
-                    <p class="navbar__text font-weight-bold">
-                        Version 0.5
-                    </p>
-                </div>
-            </div>
-        </nav>
         @* Here's where we render the page title `String`. *@
     <title>@title</title>
 
@@ -49,11 +26,28 @@
     <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")"/>
 
     </head>
-    <body class="gameBody">
+    <body class="h-100 bg-light" >
         @* And here's where we render the `Html` object containing
         * the page content. *@
-        <div class="gameBody__wrapper">
-            @content
+        <div class="d-flex m-0 h-100">
+            @if(!(gameController.game.players.contains(null)
+                    || "".equals(gameController.game.players(0).name)
+                    || "".equals(gameController.game.players(1).name))) {
+                <div>
+                @{sideBar(gameController)}
+                </div>
+                <div class="content" style="width: calc(100% - 80px)">
+                    <div class="container-fluid h-100 p-0">
+                        @content
+                    </div>
+                </div>
+            } else {
+                <div class="col-sm-11 content w-100">
+                    <div class="container-fluid h-100 p-0">
+                        @content
+                    </div>
+                </div>
+            }
         </div>
     </body>
 </html>

@@ -1,122 +1,61 @@
 @font-face {
-  font-family:"Comfortaa";
+  font-family: "Comfortaa";
   src: url("/assets/fonts/Comfortaa-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family:"ComfortaaBold";
+  font-family: "ComfortaaBold";
   src: url("/assets/fonts/Comfortaa-Bold.ttf") format("truetype");
 }
 
-// Large devices (desktops, less than 1200px)
-@media (max-width: 1199.98px) {
-  .gameBody {
-    font-size: 16px;
-  }
-}
-// Medium devices (tablets, less than 992px)
-@media (max-width: 991.98px) {
-  .gameBody {
-    font-size: 14px;
-  }
-}
-// Small devices (landscape phones, less than 768px)
-@media (max-width: 767.98px) {
-  .gameBody {
-    font-size: 12px;
-  }
-}
-// Extra small devices (portrait phones, less than 576px)
-@media (max-width: 575.98px) {
-  .gameBody {
-    font-size: 10px;
-  }
-}
-html, body {
-  height: 100%;
-  overflow: auto;
-}
-
-.gameBody {
-  padding: 0;
-  margin: 0;
-
+body {
   font-family: 'Comfortaa', cursive;
-  background-image: url("images/tictactoeBackground.jpg");
-  perspective: 1000px;
-
-  background-size: cover;
-  background-repeat: repeat;
-  background-position: center center;
-
-  .navbar {
-    background-color: #6c757d;
-    padding: 0;
-    margin-left: 3vw;
-    margin-right: 3vw;
-    border-radius: 5px;
-    height: 5vh;
-    box-shadow: 0 3px 5px -2px #000000;
-    &__group1 {
-      height: 100%;
-      &__button {
-        font-size: 1em;
-        color: #2EE59D;
-        padding: 0 8px;
-        height: 100%;
-        transition-duration: 0.3s;
-        align-items: center;
-        display: flex;
-      }
-      &__button:hover {
-        color: #1d996b;
-      }
-      span {
-        margin: auto;
-      }
-    }
-    &__text {
-      font-size: 1em;
-      padding: 0 8px;
-      transition-duration: 0.3s;
-      align-items: center;
-      justify-content: center;
-      display: flex;
-      color: white;
-      margin: 0;
-    }
-    &__collapse {
-      justify-content: flex-end;
-    }
+  .triggerButton {
+    display: none;
   }
+  .sideBar {
+    width: 80px;
 
-  .gameLogo {
-    text-align: center;
-    #gameLogoImage {
-      width: 20em;
-    }
-  }
-  &__wrapper {
-    width: 75vw;
-    overflow: auto;
-    margin-right: 12.5vw;
-    margin-left: 12.5vw;
-    margin-top: 0.5em;
-    padding: 0.75em;
-    .statusMessage {
-      margin-right: 1em;
-      margin-left: 1em;
-      border: 0.05em inset black;
-      padding: 4px;
-      text-align: center;
-      font-size: 1em;
-      line-height: 1.5;
-      &__header {
+    .mytooltip {
+      position: relative;
+      display: inline-block;
+
+      .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: #555;
+        color: #fff;
         text-align: center;
-        font-family: 'ComfortaaBold', cursive;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        top: -3px;
+        left: 95px;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          right: 100%;
+          margin-top: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: transparent #555 transparent transparent;
+        }
+      }
+
+      &:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
       }
     }
+  }
 
+  .content {
     .game {
       font-size: 2.25em;
       margin-top: 0.25em;
@@ -126,31 +65,39 @@ html, body {
       flex-direction: column;
       width: 100%;
       height: 100%;
+
       &__container {
         align-self: center;
+
         .grid {
           margin-top: -1em;
           transform: rotateX(42deg) rotateZ(25deg) translateZ(-1.2em);
           border-collapse: collapse;
+
           &:nth-child(2) {
             margin-top: -1.5em;
             transform: rotateX(42deg) rotateZ(25deg) translateZ(-0.7em);
           }
+
           &:nth-child(3) {
             transform: rotateX(42deg) rotateZ(25deg) translateZ(0px);
           }
+
           &:nth-child(4) {
             transform: rotateX(42deg) rotateZ(25deg) translateZ(0px);
+            margin-top: -1.75em;
           }
+
           .row {
             .col {
-              width: 2.5em;
-              height: 1.25em;
+              width: 60px;
+              height: 30px;
               border: 2pt solid #000;
               border-radius: 5px;
               margin: 0.05em;
               background-color: white;
               padding: 0;
+
               a {
                 display: block;
                 height: 100%;
@@ -176,112 +123,22 @@ html, body {
           }
         }
       }
-      .enterPlayers {
-        margin-top: 1em;
-        .enterPlayer1 {
-          justify-content: center;
-          &__label {
-            width: 100%;
-            font-family: 'ComfortaaBold', cursive;
-          }
-          &__input {
-            align-self: center;
-            &__form {
-              font-size: 0.5em;
-              box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-            }
-          }
-        }
-        .enterPlayer2 {
-          justify-content: center;
-          &__label {
-            width: 100%;
-            font-family: 'ComfortaaBold', cursive;
-          }
-          &__input {
-            align-self: center;
-            &__form {
-              font-size: 0.5em;
-              box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-            }
-          }
-        }
-        .startGame {
-          text-align: center;
-          justify-content: center;
-          &__container {
-            margin-top: 1em;
-            &__button {
-              font-size: 0.85em;
-              width: 100%;
-              height: 100%;
-              align-self: center;
-              padding-top: 0;
-              padding-bottom: 0;
-              box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-              transition: all 0.3s ease 0s;
-            }
-            &__button:hover {
-              border-radius: 3px;
-              background-color: #2EE59D;
-              box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-              0 6px 20px 0 rgba(0, 0, 0, 0.19);
-              color: #fff;
-              transform: translateY(-7px);
-            }
-          }
-        }
-      }
     }
-    .gameButtons {
-      width: 100%;
-      margin-top: 5vh;
-      align-self: center;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      .col {
-        text-align: center;
-      }
-      .btn-labeled:hover {
-        border-radius: 3px;
-        background-color: #2EE59D;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        color: #fff;
-        transform: translateY(-7px);
-      }
-      .btn-labeled {
-        font-size: 1em;
-        padding-top: 0;
-        padding-bottom: 0;
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease 0s;
-        .btn-label {
-          height: 2.3em;
-          width: 3.5em;
-          position: relative;
-          left: -12px;
-          display: inline-block;
-          padding: 6px 12px;
-          background: rgba(0,0,0,0.15);
-          border-radius: 3px;
-          &__restart {
-            color: white; //Need to make Icon White, i dont know how to
-            width: 1.5em;
-            height: 1.5em;
-            align-self: center;
-            justify-content: center;
-          }
-        }
+  }
+}
+@media (max-width: 670px) {
+  body {
+    .content {
+      width: 100%!important;
+    }
+    .sideBar {
+      position: absolute;
+      left: -60px;
+      z-index: 999;
+      transition: left 1s;
+      &:hover {
+        left: 0;
       }
     }
   }
 }
-
-
-
-
-
-
-

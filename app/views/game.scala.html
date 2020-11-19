@@ -1,29 +1,49 @@
 @(gameController: de.htwg.se.ticTacToe3D.controller.controllerComponent.ControllerInterface)
-
-<div class="game__container">
-@for(gridIndex <- gameController.game.grids.indices) {
-    <table class="grid table w-auto">
-    @for(row <- gameController.game.grids(gridIndex).cells.indices) {
-        <tr class="row">
-        @for(col <- gameController.game.grids(gridIndex).cells(row).indices) {
-            @if(gameController.game.grids(gridIndex).cell(row, col).isSet) {
-                @if(gameController.game.grids(gridIndex).cell(row, col).toString == "X") {
-                    <td class="col col__player1"> </td>
-                } else {
-                    <td class="col col__player2"> </td>
-                }
+<div class="d-flex flex-column mx-auto mt-0">
+        <div class="statusMessage">
+            @if(gameController.won(0) || gameController.won(1)) {
+                <div class="statusMessage__header alert alert-info">
+                    GAME OVER!
+                    <br>
+                    @{
+                        gameController.statusMessage
+                    }
+                </div>
             } else {
-                <td class="col">
+                <div class="statusMessage__header alert alert-success">
+                    Status Message:
+                    <br>
+                    @{
+                        gameController.statusMessage
+                    }
+                </div>
+            }
+        </div>
+    <div class="game__container m-auto">
+        @for(gridIndex <- gameController.game.grids.indices) {
+        <table class="grid table w-auto">
+        @for(row <- gameController.game.grids(gridIndex).cells.indices) {
+            <tr class="row">
+            @for(col <- gameController.game.grids(gridIndex).cells(row).indices) {
+                @if(gameController.game.grids(gridIndex).cell(row, col).isSet) {
+                    @if(gameController.game.grids(gridIndex).cell(row, col).toString == "X") {
+                        <td class="col col__player1"> </td>
+                    } else {
+                        <td class="col col__player2"> </td>
+                    }
+                } else {
+                    <td class="col">
                     @if(!gameController.won(0) && !gameController.won(1)) {
                         <a id="notSet" href="/move/@row@col@gridIndex">
                         </a>
                     }
-                </td>
-            }
+                    </td>
+                }
 
+            }
+            </tr>
         }
-        </tr>
+        </table>
     }
-    </table>
-    }
+    </div>
 </div>

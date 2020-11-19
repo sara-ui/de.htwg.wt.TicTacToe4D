@@ -14,7 +14,7 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
    * @return the about page
    */
   def about= Action {
-    Ok(views.html.index())
+    Ok(views.html.index(gameController))
   }
 
   /**
