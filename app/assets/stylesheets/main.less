@@ -56,6 +56,15 @@ body {
   }
 
   .content {
+    .statusMessage {
+      &__header {
+        font-size: 16px;
+        &__header {
+          font-family: 'ComfortaaBold', cursive;
+          font-size: 18px;
+        }
+      }
+    }
     .game {
       font-size: 2.25em;
       margin-top: 0.25em;
@@ -129,7 +138,85 @@ body {
 @media (max-width: 670px) {
   body {
     .content {
-      width: 100%!important;
+      .statusMessage {
+        &__header {
+          font-size: 12px;
+          &__header {
+            font-family: 'ComfortaaBold', cursive;
+            font-size: 14px;
+          }
+        }
+      }
+      width: 100% !important;
+    }
+    .sideBar {
+      position: absolute;
+      left: -60px;
+      z-index: 999;
+      transition: left 1s;
+      &:hover {
+        left: 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 670px) {
+  body {
+    .content {
+      .game {
+        &__container {
+          .grid {
+            .row {
+              .col {
+                width: 5em;
+                height: 3em;
+              }
+            }
+          }
+        }
+      }
+      width: 100% !important;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    .content {
+      .game {
+        &__container {
+          .grid {
+            .row {
+              .col {
+                width: 6em;
+                height: 4em;
+              }
+            }
+          }
+        }
+      }
+      width: 100% !important;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  body {
+    .content {
+      .game {
+        &__container {
+          .grid {
+            .row {
+              .col {
+                width: 55px;
+                height: 25px;
+              }
+            }
+          }
+        }
+      }
+      width: 100% !important;
     }
     .sideBar {
       position: absolute;

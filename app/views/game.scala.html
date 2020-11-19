@@ -2,16 +2,20 @@
 <div class="d-flex flex-column mx-auto mt-0">
         <div class="statusMessage">
             @if(gameController.won(0) || gameController.won(1)) {
-                <div class="statusMessage__header alert alert-info">
-                    GAME OVER!
+                <div class="statusMessage__header alert alert-success">
+                    <span class="statusMessage__header__header">
+                        GAME OVER!
+                    </span>
                     <br>
                     @{
                         gameController.statusMessage
                     }
                 </div>
             } else {
-                <div class="statusMessage__header alert alert-success">
-                    Status Message:
+                <div class="statusMessage__header alert alert-info">
+                    <span class="statusMessage__header__header">
+                        Status Message:
+                    </span>
                     <br>
                     @{
                         gameController.statusMessage
