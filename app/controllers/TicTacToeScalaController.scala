@@ -1,8 +1,11 @@
 package controllers
 import javax.inject._
-
 import play.api.mvc._
 import de.htwg.se.ticTacToe3D.TicTacToe
+import play.api.libs.json.{JsValue, Json}
+import play.api.mvc._
+
+import scala.util.{Failure, Success}
 
 @Singleton
 class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
@@ -41,13 +44,18 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
    * @param step move
    * @return TUI + status message
    */
-  def move(step: String) = Action { // "123" --> ["1", "2", "3"] --> [1, 2, 3]
-    step.toList.filter(c => c != ' ').map(c => c.toString.toInt) match {
-      case row :: column :: grid :: Nil => gameController.setValue(row, column, grid)
-      case _ => None
+  def move = Action(parse.json) {
+      moveRequest: Request[JsValue] => {
+        val row = (moveRequest.body \ "row").as[String].toInt
+        val col = (moveRequest.body \ "col").as[String].toInt
+        val gridIndex = (moveRequest.body \ "gridIndex").as[String].toInt
+
+        gameController.setValue(row, col, gridIndex)
+        Ok(views.html.tictactoe(gameController))
+      }
     }
-    Ok(views.html.tictactoe(gameController))
-  }
+
+
 
   /**
    * reset the game --> reset players

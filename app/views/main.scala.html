@@ -16,10 +16,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")" >
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/toastr.min.css")" >
 
     <script src="@routes.Assets.versioned("javascripts/popper.js")" type="text/javascript"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="@routes.Assets.versioned("javascripts/jquery-3.5.1.js")" type="text/javascript"></script>
     <script src="@routes.Assets.versioned("javascripts/anime.min.js")"></script>
+    <script src="@routes.Assets.versioned("javascripts/toastr.min.js")"></script>
     <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")" ></script>
     <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
 
@@ -28,7 +30,7 @@
     <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")"/>
 
     </head>
-    <body class="h-100 bg-light" >
+    <body class="h-100 bg-light" id="c">
         @* And here's where we render the `Html` object containing
         * the page content. *@
         <div class="d-flex m-0 h-100">

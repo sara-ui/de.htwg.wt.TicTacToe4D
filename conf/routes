@@ -18,7 +18,7 @@ GET     /restart                    controllers.TicTacToeScalaController.restart
 
 GET     /players                    controllers.TicTacToeScalaController.players(player1: String, player2: String)
 
-GET     /move/:step                 controllers.TicTacToeScalaController.move(step: String)
+POST    /move                       controllers.TicTacToeScalaController.move
 
 
 # Map static resources from the /public folder to the /assets URL path

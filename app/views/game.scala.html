@@ -38,8 +38,12 @@
                 } else {
                     <td class="col">
                     @if(!gameController.won(0) && !gameController.won(1)) {
-                        <a id="notSet" href="/move/@row@col@gridIndex">
-                        </a>
+                        <div id="notSet"
+                            gridCol=@{col}
+                            gridRow=@{row}
+                            gridIndex=@{gridIndex}
+                            onclick="move(this)">
+                        </div>
                     }
                     </td>
                 }
