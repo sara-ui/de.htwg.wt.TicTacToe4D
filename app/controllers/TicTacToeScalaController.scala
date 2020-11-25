@@ -25,6 +25,7 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
    * @return the TUI + Status message
    */
   def tictactoe = Action {
+    gameToJson
     Ok(views.html.tictactoe(gameController))
   }
 
@@ -36,7 +37,7 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
    */
   def players(player1: String, player2: String) = Action {
     gameController.setPlayers(player1, player2)
-    Ok(views.html.tictactoe(gameController))
+    Redirect(controllers.routes.TicTacToeScalaController.tictactoe());
   }
 
   /**
@@ -46,12 +47,21 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
    */
   def move = Action(parse.json) {
       moveRequest: Request[JsValue] => {
-        val row = (moveRequest.body \ "row").as[String].toInt
-        val col = (moveRequest.body \ "col").as[String].toInt
-        val gridIndex = (moveRequest.body \ "gridIndex").as[String].toInt
-
-        gameController.setValue(row, col, gridIndex)
-        Ok(views.html.tictactoe(gameController))
+        val row = (moveRequest.body \ "row").as[Int]
+        val col = (moveRequest.body \ "col").as[Int]
+        val gridIndex = (moveRequest.body \ "grid").as[Int]
+        if(gameController.won(0) || gameController.won(1)) {
+          Ok(Json.obj(
+            "statusMessage" -> gameController.statusMessage,
+            "gridArray" ->  ""
+          ))
+        } else {
+          gameController.setValue(row, col, gridIndex)
+          Ok(Json.obj(
+            "statusMessage" -> gameController.statusMessage,
+            "gridArray" ->  createOneGridJson(gridIndex)
+          ))
+        }
       }
     }
 
@@ -93,4 +103,25 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
     Redirect(controllers.routes.TicTacToeScalaController.tictactoe());
   }
 
+  def createJson = gameController.game.grids.map(grid => {
+    grid.cells.map(row => {
+      row.map(cell => {
+        if (!cell.isSet) "-" else cell.value
+      })
+    })
+  })
+  def createOneGridJson (grid: Int) = gameController.game.grids(grid).cells.map(row => {
+      row.map(cell => {
+        if (!cell.isSet) "-" else cell.value
+      })
+  })
+
+  def gameToJson = Action {
+    Ok(Json.obj(
+      "statusMessage" -> gameController.statusMessage,
+      "gridArray" -> createJson
+    ))
+  }
+
 }
+
