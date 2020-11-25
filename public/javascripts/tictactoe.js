@@ -37,13 +37,21 @@ class Game {
                         $(document).on('click', '#notSet' + grid + '-' + row + '-' + column, () => {
                             this.move(grid, row, column)
                         })
+                        document.getElementById('notSet' + grid + '-' + row + '-' + column).style.cursor = 'pointer'
                     }
                 }
             }
         }
     }
     statusMessage (message, won) {
-        return `<div class="statusMessage__header alert alert-success">
+        return won ? `<div class="statusMessage__header alert alert-success">
+                    <span class="statusMessage__header__header">
+                        ${won ? 'GAME OVER!' : 'Status Message:'}
+                    </span>
+                    <br>
+                    ${message}
+                </div>` :
+            `<div class="statusMessage__header alert alert-info"">
                     <span class="statusMessage__header__header">
                         ${won ? 'GAME OVER!' : 'Status Message:'}
                     </span>
