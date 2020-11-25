@@ -37,7 +37,6 @@ class Game {
                         $(document).on('click', '#notSet' + grid + '-' + row + '-' + column, () => {
                             this.move(grid, row, column)
                         })
-                        document.getElementById('notSet' + grid + '-' + row + '-' + column).style.cursor = 'pointer'
                     }
                 }
             }

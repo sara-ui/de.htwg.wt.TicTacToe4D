@@ -111,6 +111,7 @@ body {
               box-shadow: 0 0 1px rgba(0, 0, 0, 0);
               transition-duration: 0.3s;
               transition-property: transform;
+              cursor : pointer;
               a {
                 display: block;
                 height: 100%;
@@ -122,9 +123,15 @@ body {
               }
               &__player1 {
                 background-color: red;
+                cursor: default;
               }
               &__player2 {
                 background-color: royalblue;
+                cursor: default;
+              }
+              &:hover:before {
+                opacity: 1;
+                transform: translateY(5px);
               }
               &:before {
                 pointer-events: none;
@@ -139,10 +146,6 @@ body {
                 background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
                 transition-duration: 0.3s;
                 transition-property: transform, opacity;
-              }
-              &:hover:before {
-                opacity: 1;
-                transform: translateY(5px);
               }
             }
           }
