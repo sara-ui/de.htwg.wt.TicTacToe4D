@@ -77,7 +77,7 @@ class Game {
      * @param won boolean that indicates if the games is already finished
      * @returns {string}
      */
-    statusMessage(message, won) {
+    createStatusMessage(message, won) {
         return `<div class="statusMessage__header alert alert-success">
                     <span class="statusMessage__header__header">
                         ${won ? 'GAME OVER!' : 'Status Message:'}
@@ -93,7 +93,7 @@ class Game {
      * @param won boolean that indicates if the games is already finished
      */
     updateStatusMessage(message, won) {
-        $("#statusMessage").html(this.statusMessage(message, won))
+        $("#statusMessage").html(this.createStatusMessage(message, won))
     }
 
     /**
