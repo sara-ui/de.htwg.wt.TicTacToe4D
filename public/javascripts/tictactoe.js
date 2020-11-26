@@ -16,16 +16,17 @@ class Game {
 
     /**
      * Fills the grids array with the values json
-     * @param json the new values of the grids
+     * @param newGrids the new values of the grids
      */
-    fill(json) {
-        this.grids = json
+    fill(newGrids) {
+        this.grids = newGrids
     }
 
     /**
-     * Creates the new html grids programmatically
+     * Creates the game view HTML
+     * @returns {string}
      */
-    updateView() {
+    createView () {
         let html = ""
         for (let grid = 0; grid < this.grids.length; grid++) {
             html += '<table class="grid table w-auto">'
@@ -41,8 +42,16 @@ class Game {
                 }
             }
             html += '</table>'
-            $("#gameContainer").html(html)
         }
+        return html
+    }
+
+    /**
+     * Creates the new html grids programmatically
+     */
+    updateView() {
+        const html = this.createView()
+        $("#gameContainer").html(html)
     }
 
     /**
