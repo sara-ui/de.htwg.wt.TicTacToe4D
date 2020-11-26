@@ -20,7 +20,7 @@ GET     /players                    controllers.TicTacToeScalaController.players
 
 POST    /move                       controllers.TicTacToeScalaController.move
 
-GET    /json                       controllers.TicTacToeScalaController.gameToJson
+GET     /json                       controllers.TicTacToeScalaController.gameToJson
 
 
 # Map static resources from the /public folder to the /assets URL path

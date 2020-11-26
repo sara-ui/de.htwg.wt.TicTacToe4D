@@ -78,7 +78,7 @@ class Game {
      * @returns {string}
      */
     createStatusMessage(message, won) {
-        return `<div class="statusMessage__header alert alert-success">
+        return `<div class="statusMessage__header alert alert-info">
                     <span class="statusMessage__header__header">
                         ${won ? 'GAME OVER!' : 'Status Message:'}
                     </span>
