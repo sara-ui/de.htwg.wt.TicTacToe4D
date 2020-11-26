@@ -29,6 +29,7 @@ class Game {
             $("#gameContainer").html(html)
         }
     }
+
     registerClickListener() {
         for (let grid = 0; grid < this.grids.length; grid++) {
             for (let row = 0; row < this.grids[grid].length; row++) {
@@ -42,15 +43,9 @@ class Game {
             }
         }
     }
-    statusMessage (message, won) {
-        return won ? `<div class="statusMessage__header alert alert-success">
-                    <span class="statusMessage__header__header">
-                        ${won ? 'GAME OVER!' : 'Status Message:'}
-                    </span>
-                    <br>
-                    ${message}
-                </div>` :
-            `<div class="statusMessage__header alert alert-info"">
+
+    statusMessage(message, won) {
+        return `<div class="statusMessage__header alert alert-success">
                     <span class="statusMessage__header__header">
                         ${won ? 'GAME OVER!' : 'Status Message:'}
                     </span>
@@ -58,9 +53,11 @@ class Game {
                     ${message}
                 </div>`
     }
-    updateStatusMessage (message, won) {
+
+    updateStatusMessage(message, won) {
         $("#statusMessage").html(this.statusMessage(message, won))
     }
+
     move(grid, row, column) {
         $.ajax({
             method: "POST",
@@ -95,6 +92,7 @@ class Game {
         }
     }
 }
+
 let game = new Game(4)
 
 function loadGame() {
@@ -115,6 +113,6 @@ function loadGame() {
 }
 
 $(document).ready(function () {
-    console.log("start")
+    console.log("start loading our Game")
     loadGame();
 })
