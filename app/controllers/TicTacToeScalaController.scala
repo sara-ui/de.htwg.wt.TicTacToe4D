@@ -1,4 +1,5 @@
 package controllers
+
 import javax.inject._
 import play.api.mvc._
 import de.htwg.se.ticTacToe3D.TicTacToe
@@ -14,14 +15,16 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
 
   /**
    * the About Page
+   *
    * @return the about page
    */
-  def about= Action {
+  def about = Action {
     Ok(views.html.index(gameController))
   }
 
   /**
    * TUI Page
+   *
    * @return the TUI + Status message
    */
   def tictactoe = Action {
@@ -31,6 +34,7 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
 
   /**
    * Setting players names
+   *
    * @param player1 name
    * @param player2 name
    * @return TUI + status message
@@ -42,33 +46,34 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
 
   /**
    * Making a game move
+   *
    * @param step move
    * @return TUI + status message
    */
   def move = Action(parse.json) {
-      moveRequest: Request[JsValue] => {
-        val row = (moveRequest.body \ "row").as[Int]
-        val col = (moveRequest.body \ "col").as[Int]
-        val gridIndex = (moveRequest.body \ "grid").as[Int]
-        if(gameController.won(0) || gameController.won(1)) {
-          Ok(Json.obj(
-            "statusMessage" -> gameController.statusMessage,
-            "gridArray" ->  ""
-          ))
-        } else {
-          gameController.setValue(row, col, gridIndex)
-          Ok(Json.obj(
-            "statusMessage" -> gameController.statusMessage,
-            "gridArray" ->  createOneGridJson(gridIndex)
-          ))
-        }
+    moveRequest: Request[JsValue] => {
+      val row = (moveRequest.body \ "row").as[Int]
+      val col = (moveRequest.body \ "col").as[Int]
+      val gridIndex = (moveRequest.body \ "grid").as[Int]
+      if (gameController.won(0) || gameController.won(1)) {
+        Ok(Json.obj(
+          "statusMessage" -> gameController.statusMessage,
+          "gridArray" -> ""
+        ))
+      } else {
+        gameController.setValue(row, col, gridIndex)
+        Ok(Json.obj(
+          "statusMessage" -> gameController.statusMessage,
+          "gridArray" -> createOneGridArray(gridIndex)
+        ))
       }
     }
-
+  }
 
 
   /**
    * reset the game --> reset players
+   *
    * @return TUI + status message
    */
   def reset = Action {
@@ -78,6 +83,7 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
 
   /**
    * restart the game
+   *
    * @return TUI + status message
    */
   def restart = Action {
@@ -87,6 +93,7 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
 
   /**
    * redo the last step
+   *
    * @return TUI + status message
    */
   def redo = Action {
@@ -96,6 +103,7 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
 
   /**
    * undo the the last step
+   *
    * @return TUI + status message
    */
   def undo = Action {
@@ -103,23 +111,40 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
     Redirect(controllers.routes.TicTacToeScalaController.tictactoe());
   }
 
-  def createJson = gameController.game.grids.map(grid => {
+  /**
+   * Creates an array of arrays for the whole game with cell value - is its empty and the corresponded O or X if its not
+   *
+   * @return Array of Arrays depending on the game size
+   */
+  def createGameArrays = gameController.game.grids.map(grid => {
     grid.cells.map(row => {
       row.map(cell => {
         if (!cell.isSet) "-" else cell.value
       })
     })
   })
-  def createOneGridJson (grid: Int) = gameController.game.grids(grid).cells.map(row => {
-      row.map(cell => {
-        if (!cell.isSet) "-" else cell.value
-      })
+
+  /**
+   * Creates one Grid array with cell value - is its empty and the corresponded O or X if its not
+   *
+   * @param grid grid index
+   * @return array of the one Grid
+   */
+  def createOneGridArray(grid: Int) = gameController.game.grids(grid).cells.map(row => {
+    row.map(cell => {
+      if (!cell.isSet) "-" else cell.value
+    })
   })
 
+  /**
+   * Create the json Object with the status message and the game
+   *
+   * @return
+   */
   def gameToJson = Action {
     Ok(Json.obj(
       "statusMessage" -> gameController.statusMessage,
-      "gridArray" -> createJson
+      "gridArray" -> createGameArrays
     ))
   }
 
