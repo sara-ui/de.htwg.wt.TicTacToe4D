@@ -3,7 +3,7 @@
  * @type {number}
  */
 let size = 4
-
+let webSocket = null;
 class Game {
     /**
      * the Constructor gets the size of the game
@@ -63,7 +63,14 @@ class Game {
                 for (let column = 0; column < this.grids[grid][row].length; column++) {
                     if (this.grids[grid][row][column] === '-') {
                         $(document).on('click', '#notSet' + grid + '-' + row + '-' + column, () => {
-                            this.move(grid, row, column)
+                            // this.move(grid, row, column)
+                            if (webSocket !== null) {
+                                webSocket.send(JSON.stringify({
+                                    "col": column,
+                                    "row": row,
+                                    "grid": grid
+                                }))
+                            }
                         })
                     }
                 }
@@ -118,7 +125,7 @@ class Game {
                 const {statusMessage, gridArray} = result
                 this.updateStatusMessage(statusMessage, !gridArray)
                 if (!!gridArray) {
-                    this.updateGrid(grid, gridArray)
+                    this.updateGrids(grid, gridArray)
                 }
             }
         });
@@ -129,16 +136,17 @@ class Game {
      * @param grid index of the grid
      * @param newGrid the new grid from the BE
      */
-    updateGrid(grid, newGrid) {
-        this.grids[grid] = newGrid
-        for (let row = 0; row < newGrid.length; row++) {
+    updateGrids(newGrids) {
+        this.grids = newGrids
+        this.updateView()
+        /*for (let row = 0; row < newGrid.length; row++) {
             for (let column = 0; column < newGrid[row].length; column++) {
                 if (newGrid[row][column] !== '-') {
                     const player = newGrid[row][column] === 'X' ? 1 : 2
                     $('#notSet' + grid + '-' + row + '-' + column).addClass('col col__player' + player).removeAttr('id');
                 }
             }
-        }
+        }*/
     }
 }
 
@@ -163,6 +171,25 @@ function loadGame() {
         }
     });
 }
+function connectWebSocket() {
+    webSocket = new WebSocket("ws://localhost:9000/websocket")
+    console.info("Connecting to WebSocket...");
+
+    webSocket.onopen = () => {
+        console.info("Connected to server: " + webSocket.url);
+    }
+    webSocket.onmessage = message => {
+        const result = JSON.parse(message.data);
+        const {statusMessage, gridArray} = result
+        console.log(statusMessage, gridArray)
+        game.updateStatusMessage(statusMessage, !gridArray)
+        if (!!gridArray) {
+            game.updateGrids(gridArray)
+        }
+    }
+    webSocket.onerror = event => console.error(event);
+    webSocket.onclose = () => setTimeout(connectWebSocket, 2000);
+}
 
 /**
  * When the document is ready load the game
@@ -170,4 +197,5 @@ function loadGame() {
 $(document).ready(function () {
     console.log("start loading our Game")
     loadGame();
+    connectWebSocket();
 })

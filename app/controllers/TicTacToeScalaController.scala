@@ -1,15 +1,17 @@
 package controllers
 
 import javax.inject._
-import play.api.mvc._
 import de.htwg.se.ticTacToe3D.TicTacToe
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc._
+import de.htwg.se.ticTacToe3D.util.Observer
+import play.api.libs.streams.ActorFlow
+import akka.actor.{Actor, ActorRef, ActorSystem, Props}
+import akka.stream.Materializer
 
-import scala.util.{Failure, Success}
 
 @Singleton
-class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class TicTacToeScalaController @Inject()(cc: ControllerComponents)(implicit system: ActorSystem, mat: Materializer) extends AbstractController(cc) {
   val gameController = TicTacToe.controller
   // def tictactoeAsText =  gameController.toString + gameController.statusMessage
 
@@ -47,7 +49,6 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
   /**
    * Making a game move
    *
-   * @param step move
    * @return TUI + status message
    */
   def move = Action(parse.json) {
@@ -146,6 +147,45 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents) extends Abstr
       "statusMessage" -> gameController.statusMessage,
       "gridArray" -> createGameArrays
     ))
+  }
+
+  def socket: WebSocket = WebSocket.accept[String, String] { _ =>
+    ActorFlow.actorRef {
+      out => Props(new TictactoeWebSocketActor(out))
+    }
+  }
+
+  class TictactoeWebSocketActor(out: ActorRef) extends Actor with Observer {
+    gameController.add(this)
+
+    override def update: Boolean = {
+      out ! Json.obj(
+        "statusMessage" -> gameController.statusMessage,
+        "gridArray" -> createGameArrays
+      ).toString()
+      true
+    }
+
+    def receive: Receive = {
+      case message: String => {
+        val jsonObj = Json.parse(message)
+        val row = (jsonObj \ "row").as[Int]
+        val col = (jsonObj \ "col").as[Int]
+        val gridIndex = (jsonObj \ "grid").as[Int]
+        if (gameController.won(0) || gameController.won(1)) {
+          out ! Json.obj(
+            "statusMessage" -> gameController.statusMessage,
+            "gridArray" -> ""
+          ).toString()
+        } else {
+          gameController.setValue(row, col, gridIndex)
+          out ! Json.obj(
+            "statusMessage" -> gameController.statusMessage,
+            "gridArray" -> createGameArrays
+          ).toString()
+        }
+      }
+    }
   }
 
 }
