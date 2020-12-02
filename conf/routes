@@ -21,6 +21,7 @@ GET     /players                    controllers.TicTacToeScalaController.players
 POST    /move                       controllers.TicTacToeScalaController.move
 
 GET     /json                       controllers.TicTacToeScalaController.gameToJson
+
 GET     /websocket                  controllers.TicTacToeScalaController.socket
 
 

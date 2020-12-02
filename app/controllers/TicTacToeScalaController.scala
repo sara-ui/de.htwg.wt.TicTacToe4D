@@ -88,8 +88,12 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents)(implicit syst
    * @return TUI + status message
    */
   def restart = Action {
+    println(Json.obj())
     gameController.restart
-    Redirect(controllers.routes.TicTacToeScalaController.tictactoe());
+    Ok(Json.obj(
+      "statusMessage" -> gameController.statusMessage,
+      "gridArray" -> createGameArrays
+    ))
   }
 
   /**
@@ -99,7 +103,9 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents)(implicit syst
    */
   def redo = Action {
     gameController.redo
-    Redirect(controllers.routes.TicTacToeScalaController.tictactoe());
+    Ok(Json.obj(
+      "statusMessage" -> gameController.statusMessage
+    ))
   }
 
   /**
@@ -109,7 +115,9 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents)(implicit syst
    */
   def undo = Action {
     gameController.undo
-    Redirect(controllers.routes.TicTacToeScalaController.tictactoe());
+    Ok(Json.obj(
+      "statusMessage" -> gameController.statusMessage
+    ))
   }
 
   /**
