@@ -23,6 +23,14 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents)(implicit syst
   def about = Action {
     Ok(views.html.index(gameController))
   }
+  /**
+   * Vuejs Index
+   *
+   * @return the about page
+   */
+  def vueIndex(name: String = null) = Action {
+    Ok(views.html.vueIndex())
+  }
 
   /**
    * TUI Page
@@ -30,20 +38,24 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents)(implicit syst
    * @return the TUI + Status message
    */
   def tictactoe = Action {
-    gameToJson
     Ok(views.html.tictactoe(gameController))
   }
 
   /**
    * Setting players names
    *
-   * @param player1 name
-   * @param player2 name
    * @return TUI + status message
    */
-  def players(player1: String, player2: String) = Action {
-    gameController.setPlayers(player1, player2)
-    Redirect(controllers.routes.TicTacToeScalaController.tictactoe());
+  def players = Action(parse.json) {
+    playersRequest: Request[JsValue] => {
+      val player1 = (playersRequest.body \ "player1").as[String]
+      val player2 = (playersRequest.body \ "player2").as[String]
+      gameController.setPlayers(player1, player2)
+      Ok(Json.obj(
+        "statusMessage" -> gameController.statusMessage,
+        "gridArray" -> createGameArrays
+      ))
+    }
   }
 
   /**
@@ -79,7 +91,10 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents)(implicit syst
    */
   def reset = Action {
     gameController.reset
-    Redirect(controllers.routes.TicTacToeScalaController.tictactoe());
+    Ok(Json.obj(
+      "statusMessage" -> gameController.statusMessage,
+      "gridArray" -> ""
+    ))
   }
 
   /**
@@ -157,35 +172,20 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents)(implicit syst
     ))
   }
 
-  /**
-   * Instead of a normal Action, call Websocket.accept and create the actor
-   * @return
-   */
   def socket: WebSocket = WebSocket.accept[String, String] { _ =>
     ActorFlow.actorRef {
       out => Props(new TictactoeWebSocketActor(out))
     }
   }
 
-  /**
-   *reacting to events from the game, the actor become an observer to the gamecontroller
-   * @param out
-   */
   class TictactoeWebSocketActor(out: ActorRef) extends Actor with Observer {
     gameController.add(this)
 
     override def update: Boolean = {
-      if (gameController.won(0) || gameController.won(1)) {
-        out ! Json.obj(
-          "statusMessage" -> gameController.statusMessage,
-          "gridArray" -> ""
-        ).toString()
-      } else {
-        out ! Json.obj(
-          "statusMessage" -> gameController.statusMessage,
-          "gridArray" -> createGameArrays
-        ).toString()
-      }
+      out ! Json.obj(
+        "statusMessage" -> gameController.statusMessage,
+        "gridArray" -> createGameArrays
+      ).toString()
       true
     }
 
@@ -195,11 +195,28 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents)(implicit syst
         val row = (jsonObj \ "row").as[Int]
         val col = (jsonObj \ "col").as[Int]
         val gridIndex = (jsonObj \ "grid").as[Int]
-        if (!gameController.won(0) && !gameController.won(1)) {
+        if (gameController.won(0) || gameController.won(1)) {
+          out ! Json.obj(
+            "statusMessage" -> gameController.statusMessage,
+            "gridArray" -> ""
+          ).toString()
+        } else {
           gameController.setValue(row, col, gridIndex)
+          out ! Json.obj(
+            "statusMessage" -> gameController.statusMessage,
+            "gridArray" -> createGameArrays
+          ).toString()
         }
       }
     }
+  }
+
+  def isLoggedIn() = Action {
+    Ok(Json.obj({
+      "isLoggedIn" -> !(gameController.game.players.contains(null)
+        || "".equals(gameController.game.players(0).name)
+        || "".equals(gameController.game.players(1).name))
+    }))
   }
 }
 

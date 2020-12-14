@@ -4,19 +4,20 @@
 
 # Controller for TicTacToe4D
 
-GET     /                           controllers.TicTacToeScalaController.tictactoe
+#GET     /                          controllers.TicTacToeScalaController.tictactoe
+
 
 GET     /about                      controllers.TicTacToeScalaController.about
 
-GET     /reset                      controllers.TicTacToeScalaController.reset
+POST     /reset                      controllers.TicTacToeScalaController.reset
 
 GET     /redo                       controllers.TicTacToeScalaController.redo
 
 GET     /undo                       controllers.TicTacToeScalaController.undo
 
-GET     /restart                    controllers.TicTacToeScalaController.restart
+POST     /restart                    controllers.TicTacToeScalaController.restart
 
-GET     /players                    controllers.TicTacToeScalaController.players(player1: String, player2: String)
+POST     /players                    controllers.TicTacToeScalaController.players
 
 POST    /move                       controllers.TicTacToeScalaController.move
 
@@ -24,6 +25,13 @@ GET     /json                       controllers.TicTacToeScalaController.gameToJ
 
 GET     /websocket                  controllers.TicTacToeScalaController.socket
 
+POST    /isLoggedIn                  controllers.TicTacToeScalaController.isLoggedIn
+
 
 # Map static resources from the /public folder to the /assets URL path
+GET     /myAssets/*file               controllers.Assets.versioned(path="/public/myAssets", file: Asset)
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+
+GET     /                       controllers.TicTacToeScalaController.vueIndex(name: String = null)
+GET     /*name                 controllers.TicTacToeScalaController.vueIndex(name: String)
