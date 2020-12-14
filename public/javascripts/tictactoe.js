@@ -63,13 +63,14 @@ class Game {
                 for (let column = 0; column < this.grids[grid][row].length; column++) {
                     if (this.grids[grid][row][column] === '-') {
                         $(document).on('click', '#notSet' + grid + '-' + row + '-' + column, () => {
-                            // this.move(grid, row, column)
                             if (webSocket !== null) {
                                 webSocket.send(JSON.stringify({
                                     "col": column,
                                     "row": row,
                                     "grid": grid
                                 }))
+                            } else {
+                                this.move(grid, row, column)
                             }
                         })
                     }
@@ -181,7 +182,6 @@ function connectWebSocket() {
     webSocket.onmessage = message => {
         const result = JSON.parse(message.data);
         const {statusMessage, gridArray} = result
-        console.log(statusMessage, gridArray)
         game.updateStatusMessage(statusMessage, !gridArray)
         if (!!gridArray) {
             game.updateGrids(gridArray)

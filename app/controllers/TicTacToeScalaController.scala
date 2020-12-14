@@ -157,20 +157,35 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents)(implicit syst
     ))
   }
 
+  /**
+   * Instead of a normal Action, call Websocket.accept and create the actor
+   * @return
+   */
   def socket: WebSocket = WebSocket.accept[String, String] { _ =>
     ActorFlow.actorRef {
       out => Props(new TictactoeWebSocketActor(out))
     }
   }
 
+  /**
+   *reacting to events from the game, the actor become an observer to the gamecontroller
+   * @param out
+   */
   class TictactoeWebSocketActor(out: ActorRef) extends Actor with Observer {
     gameController.add(this)
 
     override def update: Boolean = {
-      out ! Json.obj(
-        "statusMessage" -> gameController.statusMessage,
-        "gridArray" -> createGameArrays
-      ).toString()
+      if (gameController.won(0) || gameController.won(1)) {
+        out ! Json.obj(
+          "statusMessage" -> gameController.statusMessage,
+          "gridArray" -> ""
+        ).toString()
+      } else {
+        out ! Json.obj(
+          "statusMessage" -> gameController.statusMessage,
+          "gridArray" -> createGameArrays
+        ).toString()
+      }
       true
     }
 
@@ -180,21 +195,11 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents)(implicit syst
         val row = (jsonObj \ "row").as[Int]
         val col = (jsonObj \ "col").as[Int]
         val gridIndex = (jsonObj \ "grid").as[Int]
-        if (gameController.won(0) || gameController.won(1)) {
-          out ! Json.obj(
-            "statusMessage" -> gameController.statusMessage,
-            "gridArray" -> ""
-          ).toString()
-        } else {
+        if (!gameController.won(0) && !gameController.won(1)) {
           gameController.setValue(row, col, gridIndex)
-          out ! Json.obj(
-            "statusMessage" -> gameController.statusMessage,
-            "gridArray" -> createGameArrays
-          ).toString()
         }
       }
     }
   }
-
 }
 
