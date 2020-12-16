@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row justify-content-center">
-      <h1 style="line-height: 1.5; color: black">About</h1>
+      <h2 style="line-height: 1.5; color: black">About</h2>
     </div>
     <div class="row justify-content-center">
       <p style="line-height: 1.5; color: black">
