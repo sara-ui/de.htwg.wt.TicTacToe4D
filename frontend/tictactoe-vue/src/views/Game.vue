@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!game.gridArray" class="h-100 p-0 m-0">
+  <div v-if="checkIfWon" class="h-100 p-0 m-0">
     <GameOver></GameOver>
   </div>
   <div v-else class="h-100 p-0 m-0 d-flex">
@@ -34,7 +34,11 @@ export default {
     ...mapGetters([
       'game',
       'isLoggedIn'
-    ])
+    ]),
+    checkIfWon() {
+      console.log(this.game.statusMessage.includes("congratulation"))
+      return this.game.statusMessage.includes("congratulation")
+    }
   },
   data: () => ({
     toggleAboutPage: false
