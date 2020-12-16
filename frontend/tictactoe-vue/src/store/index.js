@@ -1,7 +1,7 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue'
+import Vuex from 'vuex'
 import axios from 'axios'
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 const initState = {
   players: {},
@@ -43,7 +43,18 @@ export default new Vuex.Store({
         commit('SET_PLAYERS', payload)
         commit('SET_GAME', data)
       })
+    },
+    logout ({commit}) {
+      commit('SET_IS_LOGGED_IN', false)
+      commit('SET_PLAYERS', {})
+      commit('SET_GAME', {
+        statusMessage: '',
+        gridArray: []
+      })
+    },
+    setGame({commit}, data) {
+      commit('SET_GAME', data)
     }
   },
   modules: {}
-});
+})

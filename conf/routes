@@ -9,15 +9,15 @@
 
 GET     /about                      controllers.TicTacToeScalaController.about
 
-POST     /reset                      controllers.TicTacToeScalaController.reset
+POST    /reset                      controllers.TicTacToeScalaController.reset
 
 GET     /redo                       controllers.TicTacToeScalaController.redo
 
 GET     /undo                       controllers.TicTacToeScalaController.undo
 
-POST     /restart                    controllers.TicTacToeScalaController.restart
+POST    /restart                    controllers.TicTacToeScalaController.restart
 
-POST     /players                    controllers.TicTacToeScalaController.players
+POST    /players                    controllers.TicTacToeScalaController.players
 
 POST    /move                       controllers.TicTacToeScalaController.move
 
@@ -25,13 +25,13 @@ GET     /json                       controllers.TicTacToeScalaController.gameToJ
 
 GET     /websocket                  controllers.TicTacToeScalaController.socket
 
-POST    /isLoggedIn                  controllers.TicTacToeScalaController.isLoggedIn
+POST    /isLoggedIn                 controllers.TicTacToeScalaController.isLoggedIn
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /myAssets/*file               controllers.Assets.versioned(path="/public/myAssets", file: Asset)
+GET     /myAssets/*file             controllers.Assets.versioned(path="/public/myAssets", file: Asset)
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 
-GET     /                       controllers.TicTacToeScalaController.vueIndex(name: String = null)
-GET     /*name                 controllers.TicTacToeScalaController.vueIndex(name: String)
+GET     /                           controllers.TicTacToeScalaController.vueIndex(name: String = null)
+GET     /*name                      controllers.TicTacToeScalaController.vueIndex(name: String)
