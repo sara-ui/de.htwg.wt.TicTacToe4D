@@ -36,7 +36,6 @@ export default {
       'isLoggedIn'
     ]),
     checkIfWon() {
-      console.log(this.game.statusMessage.includes("congratulation"))
       return this.game.statusMessage.includes("congratulation")
     }
   },
