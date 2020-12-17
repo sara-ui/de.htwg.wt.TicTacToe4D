@@ -2,7 +2,7 @@
   <div class="p-0 h-100 bg-info shadow sideBar">
     <div class="h-100 d-flex flex-column">
       <div @click="homeScreen()" class="mt-2 mb-5 mx-auto mytooltip">
-        <img class="img-fluid text-white" height="60px" width="60px" src="../assets/TicTacToe4D_Transparent.png" alt="Home">
+        <img class="img-fluid text-white" height="60px" width="60px" src="/assets/images/TicTacToe4D_Transparent.png" alt="Home">
         <span class="tooltiptext">Home</span>
       </div>
       <div
@@ -91,7 +91,6 @@
 </template>
 
 <script>
-import { EventBus } from '@/plugins/EventBus'
 import axios from "axios";
 import { mapActions } from "vuex";
 
@@ -111,7 +110,7 @@ export default {
         'logout'
     ]),
     homeScreen() {
-      EventBus.$emit('homeScreen')
+      this.$router.push({name: 'Game'})
     },
     undo() {
       axios.get('/undo').then(({ data }) => {
@@ -124,7 +123,7 @@ export default {
       })
     },
     about() {
-      EventBus.$emit('toggleAbout')
+      this.$router.push({name: 'About'})
     },
     restart() {
       axios.post('/restart').then(({ data }) => {
@@ -143,7 +142,9 @@ export default {
 <style lang="scss">
 .sideBar {
   width: 80px !important;
-
+  position: fixed;
+  top: 0;
+  z-index: 99;
   .mytooltip {
     position: relative;
     display: inline-block;

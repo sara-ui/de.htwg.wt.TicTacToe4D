@@ -29,8 +29,8 @@ export default {
   watch: {
     isLoggedIn: {
       handler (value) {
-        const path = value ? 'Game' : 'Login'
-        this.$router.push({ path })
+        const name = value ? 'Game' : 'Login'
+        this.$router.push({ name })
       },
       immediate: true
     }
