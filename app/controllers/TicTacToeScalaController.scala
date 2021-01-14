@@ -203,10 +203,6 @@ class TicTacToeScalaController @Inject()(cc: ControllerComponents)(implicit syst
           ).toString()
         } else {
           gameController.setValue(row, col, gridIndex)
-          out ! Json.obj(
-            "statusMessage" -> gameController.statusMessage,
-            "gridArray" -> createGameArrays
-          ).toString()
         }
       }
     }

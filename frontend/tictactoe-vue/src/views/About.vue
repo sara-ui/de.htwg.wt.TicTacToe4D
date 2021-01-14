@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import SideBar from "./SideBar";
+import SideBar from "../components/SideBar";
 export default {
   name: 'About',
   components: {SideBar}

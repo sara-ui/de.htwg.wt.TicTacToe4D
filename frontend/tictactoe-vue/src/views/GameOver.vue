@@ -1,5 +1,5 @@
 <template>
-  <div class ="gameOverScreen flex-column">
+  <div class="gameOverScreen flex-column">
     <h1>Game Over</h1>
     <b-button-group class="mt-5 buttonGroup">
       <b-button
@@ -39,6 +39,7 @@ export default {
     restart() {
       axios.post('/restart').then(({ data }) => {
         this.setGame(data)
+        // this.$router.push({name: 'Game'})
       })
     },
     reset() {
