@@ -1,5 +1,5 @@
 <template>
-    <form class="needs-validation" @submit="$emit('submit')">
+    <form class="needs-validation" @submit="submit">
         <div class="form-group">
             <label for="player1">First Player Name</label>
             <input type="text" name="player1" class="form-control" id="player1" aria-describedby="player1Help" v-model="payload.player1" required>
@@ -21,6 +21,12 @@
             payload: {
                 type: String,
                 required: true
+            }
+        },
+        methods: {
+            submit (e) {
+                e.preventDefault()
+                this.$emit('submit')
             }
         }
     }

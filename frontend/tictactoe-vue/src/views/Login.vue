@@ -28,8 +28,7 @@ export default {
         }
     }),
     methods: {
-        submit (e) {
-            e.preventDefault()
+        submit () {
             this.login(this.payload)
         },
         ...mapActions([
