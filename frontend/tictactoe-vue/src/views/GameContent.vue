@@ -78,6 +78,7 @@ export default {
 
 <style lang="scss">
 .content {
+  padding-left: 80px;
   .statusMessage {
     &__header {
       font-size: 16px;

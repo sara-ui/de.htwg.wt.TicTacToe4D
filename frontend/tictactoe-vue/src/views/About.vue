@@ -1,7 +1,7 @@
 <template>
   <div class="h-100 p-0 m-0 d-flex">
     <SideBar></SideBar>
-    <div class="content" style="width: calc(100% - 80px)">
+    <div class="content">
       <div class="container-fluid">
         <div class="row justify-content-center">
           <h2 style="line-height: 1.5; color: black">About</h2>
