@@ -4,21 +4,19 @@
     <div class="content" style="width: calc(100% - 80px)">
       <GameContent></GameContent>
     </div>
-
   </div>
 </template>
 
 <script>
-import SideBar from '@/components/SideBar'
-import GameContent from '@/components/GameContent'
+import SideBar from "@/components/SideBar";
+import GameContent from "@/components/GameContent";
 export default {
-  name: 'Game',
+  name: "Game",
   components: {
     GameContent,
     SideBar
-  },
-}
+  }
+};
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

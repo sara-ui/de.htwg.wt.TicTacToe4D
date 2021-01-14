@@ -2,19 +2,25 @@
   <div class="p-0 h-100 bg-info shadow sideBar">
     <div class="h-100 d-flex flex-column">
       <div @click="homeScreen()" class="mt-2 mb-5 mx-auto mytooltip">
-        <img class="img-fluid text-white" height="60px" width="60px" src="/assets/images/TicTacToe4D_Transparent.png" alt="Home">
+        <img
+          class="img-fluid text-white"
+          height="60px"
+          width="60px"
+          src="/assets/images/TicTacToe4D_Transparent.png"
+          alt="Home"
+        />
         <span class="tooltiptext">Home</span>
       </div>
       <div
-          @click="undo()"
-          class="mt-2 mb-4 mx-auto mytooltip"
-          @mouseenter="buttonUndoHover = true"
-          @mouseleave="buttonUndoHover = false"
+        @click="undo()"
+        class="mt-2 mb-4 mx-auto mytooltip"
+        @mouseenter="buttonUndoHover = true"
+        @mouseleave="buttonUndoHover = false"
       >
         <b-icon
-            class="text-white m-0 h2"
-            icon="arrow-return-left"
-            :animation="buttonUndoHover ? 'cylon' : null"
+          class="text-white m-0 h2"
+          icon="arrow-return-left"
+          :animation="buttonUndoHover ? 'cylon' : null"
         >
         </b-icon>
         <span class="tooltiptext">
@@ -22,15 +28,15 @@
         </span>
       </div>
       <div
-          @click="redo()"
-          class="mt-2 mb-4 mx-auto mytooltip"
-          @mouseenter="buttonRedoHover = true"
-          @mouseleave="buttonRedoHover = false"
+        @click="redo()"
+        class="mt-2 mb-4 mx-auto mytooltip"
+        @mouseenter="buttonRedoHover = true"
+        @mouseleave="buttonRedoHover = false"
       >
         <b-icon
-            class="text-white m-0 h2"
-            icon="arrow-return-right"
-            :animation="buttonRedoHover ? 'cylon' : null"
+          class="text-white m-0 h2"
+          icon="arrow-return-right"
+          :animation="buttonRedoHover ? 'cylon' : null"
         >
         </b-icon>
         <span class="tooltiptext">
@@ -39,15 +45,15 @@
       </div>
       <div class="my-auto"></div>
       <div
-          @click="about()"
-          class="mt-2 mb-4 mx-auto mytooltip"
-          @mouseenter="buttonAboutHover = true"
-          @mouseleave="buttonAboutHover = false"
+        @click="about()"
+        class="mt-2 mb-4 mx-auto mytooltip"
+        @mouseenter="buttonAboutHover = true"
+        @mouseleave="buttonAboutHover = false"
       >
         <b-icon
-            class="text-white m-0 h2"
-            icon="info-circle"
-            :animation="buttonAboutHover ? 'throb' : null"
+          class="text-white m-0 h2"
+          icon="info-circle"
+          :animation="buttonAboutHover ? 'throb' : null"
         >
         </b-icon>
         <span class="tooltiptext">
@@ -55,15 +61,15 @@
         </span>
       </div>
       <div
-          @click="restart()"
-          class="mt-2 mb-4 mx-auto mytooltip"
-          @mouseenter="buttonRestartHover = true"
-          @mouseleave="buttonRestartHover = false"
+        @click="restart()"
+        class="mt-2 mb-4 mx-auto mytooltip"
+        @mouseenter="buttonRestartHover = true"
+        @mouseleave="buttonRestartHover = false"
       >
         <b-icon
-            class="text-white m-0 h2"
-            icon="arrow-counterclockwise"
-            :animation="buttonRestartHover ? 'spin-reverse' : null"
+          class="text-white m-0 h2"
+          icon="arrow-counterclockwise"
+          :animation="buttonRestartHover ? 'spin-reverse' : null"
         >
         </b-icon>
         <span class="tooltiptext">
@@ -71,15 +77,15 @@
         </span>
       </div>
       <div
-          @click="reset()"
-          class="mt-2 mb-4 mx-auto mytooltip"
-          @mouseenter="buttonResetHover = true"
-          @mouseleave="buttonResetHover = false"
+        @click="reset()"
+        class="mt-2 mb-4 mx-auto mytooltip"
+        @mouseenter="buttonResetHover = true"
+        @mouseleave="buttonResetHover = false"
       >
         <b-icon
-            class="text-white m-0 h2"
-            icon="arrow-repeat"
-            :animation="buttonResetHover ? 'spin' : null"
+          class="text-white m-0 h2"
+          icon="arrow-repeat"
+          :animation="buttonResetHover ? 'spin' : null"
         >
         </b-icon>
         <span class="tooltiptext">
@@ -95,7 +101,7 @@ import axios from "axios";
 import { mapActions } from "vuex";
 
 export default {
-  name: 'SideBar',
+  name: "SideBar",
 
   data: () => ({
     buttonAboutHover: false,
@@ -105,38 +111,35 @@ export default {
     buttonResetHover: false
   }),
   methods: {
-    ...mapActions([
-        'setGame',
-        'logout'
-    ]),
+    ...mapActions(["setGame", "logout"]),
     homeScreen() {
-      this.$router.push({name: 'Game'})
+      this.$router.push({ name: "Game" });
     },
     undo() {
-      axios.get('/undo').then(({ data }) => {
-        this.setGame(data)
-      })
+      axios.get("/undo").then(({ data }) => {
+        this.setGame(data);
+      });
     },
     redo() {
-      axios.get('/redo').then(({ data }) => {
-        this.setGame(data)
-      })
+      axios.get("/redo").then(({ data }) => {
+        this.setGame(data);
+      });
     },
     about() {
-      this.$router.push({name: 'About'})
+      this.$router.push({ name: "About" });
     },
     restart() {
-      axios.post('/restart').then(({ data }) => {
-        this.setGame(data)
-      })
+      axios.post("/restart").then(({ data }) => {
+        this.setGame(data);
+      });
     },
     reset() {
-      axios.post('/reset').then(({ data }) => {
-        this.logout()
-      })
+      axios.post("/reset").then(({ data }) => {
+        this.logout();
+      });
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -187,5 +190,4 @@ export default {
     }
   }
 }
-
 </style>

@@ -8,30 +8,29 @@ const routes = [
     path: "/login",
     name: "Login",
     component: () =>
-        import(/* webpackChunkName: "login" */ "../views/Login.vue")
+      import(/* webpackChunkName: "login" */ "../views/Login.vue")
   },
   {
     path: "/game",
     name: "Game",
-    component: () =>
-        import(/* webpackChunkName: "game" */ "../views/Game.vue")
+    component: () => import(/* webpackChunkName: "game" */ "../views/Game.vue")
   },
   {
     path: "/about",
     name: "About",
     component: () =>
-        import(/* webpackChunkName: "About" */ "../views/About.vue")
+      import(/* webpackChunkName: "About" */ "../views/About.vue")
   },
   {
     path: "/gameOver",
     name: "GameOver",
     component: () =>
-        import(/* webpackChunkName: "gameOver" */ "../views/GameOver.vue")
+      import(/* webpackChunkName: "gameOver" */ "../views/GameOver.vue")
   }
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   routes
 });
 

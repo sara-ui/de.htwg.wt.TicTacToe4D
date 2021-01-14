@@ -2,22 +2,10 @@
   <div class="gameOverScreen flex-column">
     <h1>Game Over</h1>
     <b-button-group class="mt-5 buttonGroup">
-      <b-button
-          size="lg"
-          variant="info"
-          pill
-          class="m-5"
-          @click="restart"
-      >
+      <b-button size="lg" variant="info" pill class="m-5" @click="restart">
         PLAY AGAIN!
       </b-button>
-      <b-button
-          size="lg"
-          variant="info"
-          pill
-          class="m-5"
-          @click="reset"
-      >
+      <b-button size="lg" variant="info" pill class="m-5" @click="reset">
         CHOOSE DIFFERENT PLAYERS!
       </b-button>
     </b-button-group>
@@ -27,28 +15,25 @@
 
 <script>
 import axios from "axios";
-import {mapActions} from "vuex";
+import { mapActions } from "vuex";
 
 export default {
-  name: 'GameOver',
-  methods : {
-    ...mapActions([
-      'setGame',
-      'logout'
-    ]),
+  name: "GameOver",
+  methods: {
+    ...mapActions(["setGame", "logout"]),
     restart() {
-      axios.post('/restart').then(({ data }) => {
-        this.setGame(data)
+      axios.post("/restart").then(({ data }) => {
+        this.setGame(data);
         // this.$router.push({name: 'Game'})
-      })
+      });
     },
     reset() {
-      axios.post('/reset').then(({ data }) => {
-        this.logout()
-      })
+      axios.post("/reset").then(({ data }) => {
+        this.logout();
+      });
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -59,9 +44,9 @@ export default {
 }
 
 :root {
-  --primary-color: #6CD9CE;
+  --primary-color: #6cd9ce;
   --secondary-color: lightgrey;
-  --complimentary-color: #2E2473;
+  --complimentary-color: #2e2473;
 }
 
 .gameOverScreen {
@@ -72,7 +57,8 @@ export default {
   background-color: var(--complimentary-color);
   justify-content: center;
   align-items: center;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   position: relative;
   .buttonGroup {
     position: relative;
@@ -91,7 +77,7 @@ h1 {
 }
 
 h1::before {
-  content: '';
+  content: "";
   width: 0%;
   height: 76px;
   background-color: var(--secondary-color);
@@ -110,13 +96,13 @@ h1::before {
   left: 0;
   right: 0;
   background-color: var(--secondary-color);
-  transform: scale(.5);
-  animation: .5s slideIn ease-in-out forwards, 1s skewBg ease-in-out;
+  transform: scale(0.5);
+  animation: 0.5s slideIn ease-in-out forwards, 1s skewBg ease-in-out;
 }
 
 @keyframes skewBg {
   0% {
-    transform: scale(.5);
+    transform: scale(0.5);
   }
   100% {
     transform: scale(1);

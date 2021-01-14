@@ -2,12 +2,11 @@
   <div class="d-flex flex-column mx-auto mt-0">
     <div class="statusMessage" id="statusMessage">
       <div class="statusMessage__header alert alert-info">
-            <span class="statusMessage__header__header">
-              {{ !game.gridArray ? 'GAME OVER!' : 'Status Message:'}}
-            </span>
-        <br>
+        <span class="statusMessage__header__header">
+          {{ !game.gridArray ? "GAME OVER!" : "Status Message:" }}
+        </span>
+        <br />
         {{ game.statusMessage }}
-
       </div>
     </div>
     <div class="game__container m-auto" id="gameContainer">
@@ -16,17 +15,18 @@
           <div v-for="(j, row) in game.gridArray[grid].length">
             <tr class="row">
               <div v-for="(k, column) in game.gridArray[grid][row].length">
-                <td @click="move(grid, row, column)"
-                    v-if="game.gridArray[grid][row][column] === '-'"
-                    class="col"
-                    :id="'notSet' + grid + '-' + row + '-' + column"
-                >
-                </td>
-                <td @click="move(grid, row, column)"
-                    v-else class="col"
-                    :class="'col__player' + getPlayer(grid, row, column)"
-                >
-                </td>
+                <td
+                  @click="move(grid, row, column)"
+                  v-if="game.gridArray[grid][row][column] === '-'"
+                  class="col"
+                  :id="'notSet' + grid + '-' + row + '-' + column"
+                ></td>
+                <td
+                  @click="move(grid, row, column)"
+                  v-else
+                  class="col"
+                  :class="'col__player' + getPlayer(grid, row, column)"
+                ></td>
               </div>
             </tr>
           </div>
@@ -37,43 +37,45 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import axios from 'axios'
+import { mapActions, mapGetters } from "vuex";
+import axios from "axios";
 
 export default {
-  name: 'GameContent',
+  name: "GameContent",
   computed: {
-    ...mapGetters([
-      'game'
-    ])
+    ...mapGetters(["game"])
   },
   methods: {
-    ...mapActions([
-      'setGame'
-    ]),
+    ...mapActions(["setGame"]),
     getPlayer(grid, row, column) {
-      return this.game.gridArray[grid][row][column] === 'X' ? 1 : 2
+      return this.game.gridArray[grid][row][column] === "X" ? 1 : 2;
     },
     move(grid, row, column) {
-      axios.post('/move', {
-        "col": column,
-        "row": row,
-        "grid": grid
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(({ data }) => {
-        this.setGame(data)
-      })
+      axios
+        .post(
+          "/move",
+          {
+            col: column,
+            row: row,
+            grid: grid
+          },
+          {
+            headers: {
+              "Content-Type": "application/json"
+            }
+          }
+        )
+        .then(({ data }) => {
+          this.setGame(data);
+        });
     }
   },
   created() {
-    axios.get('/json').then(({ data }) => {
-      this.setGame(data)
-    })
+    axios.get("/json").then(({ data }) => {
+      this.setGame(data);
+    });
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -132,13 +134,13 @@ export default {
             box-shadow: 0 0 1px rgba(0, 0, 0, 0);
             transition-duration: 0.3s;
             transition-property: transform;
-            cursor : pointer;
+            cursor: pointer;
             a {
               display: block;
               height: 100%;
               width: 100%;
             }
-            &:hover:not(.col__player1):not(.col__player2)  {
+            &:hover:not(.col__player1):not(.col__player2) {
               background: #6c757d;
               transform: translateY(-10px);
             }
@@ -167,7 +169,7 @@ export default {
         &__header {
           font-size: 12px;
           &__header {
-            font-family: 'ComfortaaBold', cursive;
+            font-family: "ComfortaaBold", cursive;
             font-size: 14px;
           }
         }
