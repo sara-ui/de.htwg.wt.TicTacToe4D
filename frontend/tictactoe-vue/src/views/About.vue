@@ -1,0 +1,65 @@
+<template>
+  <div class="h-100 p-0 m-0 d-flex">
+    <SideBar></SideBar>
+    <div class="content" style="width: calc(100% - 80px)">
+      <div class="container-fluid">
+        <div class="row justify-content-center">
+          <h2 style="line-height: 1.5; color: black">About</h2>
+        </div>
+        <div class="row justify-content-center">
+          <p style="line-height: 1.5; color: black">
+            Tic tac toe is a classic game, but the standard version is
+            pointless. It’s far too easy to develop strategies that guarantee
+            you’ll draw or win. You can make the game more interesting by
+            increasing the board size from 3 * 3 to 4 * 4, but even that becomes
+            too simple after a while. To develop a truly intriguing alternative
+            version, you need to move on to higher dimensions.
+          </p>
+        </div>
+        <div class="row justify-content-center">
+          <p style="line-height: 1.5; color: black">
+            The following image shows a typical tic tac toe game:
+            <br />
+            <img style="margin-top: 12px" src="/assets/images/tictactoe.png" />
+          </p>
+        </div>
+        <div class="row justify-content-center">
+          <p style="line-height: 1.5; color: black">
+            4D Tic-Tac-Toe is a fresh interpretation of the classic game
+            Tic-Tac-Toe. As most know, Tic-Tac-Toe entails two players trying to
+            place their markers ("X" 's or "O" 's) on a 3x3 grid to obtain three
+            markers in a row. 4D Tic-Tac-Toe aims to bring much more strategy to
+            the table by expanding all the way to four dimensions! The grid will
+            be 4x4x4x4, meaning there are two more dimensions to plan around, as
+            well as the length of each dimension growing. 4D Tic- Tac-Toe
+            creates a greater need for a precise strategy. Original Tic-Tac-Toe
+            has only 9 discrete locations to place a marker, 4D will have over
+            20 times as many at 256! Since each dimension has been increased to
+            four, the requirement for winning has been raised to four in a row
+            as well.
+          </p>
+        </div>
+        <div class="row justify-content-center">
+          <p style="line-height: 1.5; color: black">
+            The following image shows a typical tic tac toe 4d game:
+            <br />
+            <img
+              style="margin-top: 12px; width: 100%"
+              src="/assets/images/tictactoe4d.jpg"
+            />
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import SideBar from "../components/SideBar";
+export default {
+  name: "About",
+  components: { SideBar }
+};
+</script>
+
+<style scoped></style>

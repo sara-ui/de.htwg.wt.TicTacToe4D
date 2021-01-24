@@ -2,36 +2,57 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Controller for TicTacToe4D
+# Home page
+GET     /move/:row/:col/:grid       controllers.ApplicationController.move(row:Int,col:Int, grid:Int)
 
-#GET     /                          controllers.TicTacToeScalaController.tictactoe
+GET     /about                      controllers.ApplicationController.about
 
+GET     /redo                       controllers.ApplicationController.redo
 
-GET     /about                      controllers.TicTacToeScalaController.about
+GET     /undo                       controllers.ApplicationController.undo
 
-POST    /reset                      controllers.TicTacToeScalaController.reset
+GET    /restart                    controllers.ApplicationController.restart
 
-GET     /redo                       controllers.TicTacToeScalaController.redo
+GET     /json                       controllers.ApplicationController.gameToJson
 
-GET     /undo                       controllers.TicTacToeScalaController.undo
+GET     /websocket                  controllers.ApplicationController.socket
 
-POST    /restart                    controllers.TicTacToeScalaController.restart
+GET     /websocket                  controllers.ApplicationController.socket
 
-POST    /players                    controllers.TicTacToeScalaController.players
+GET         /                                controllers.ApplicationController.index
+GET         /signOut                         controllers.ApplicationController.signOut
+GET         /authenticate/:provider          controllers.SocialAuthController.authenticate(provider)
 
-POST    /move                       controllers.TicTacToeScalaController.move
+GET         /signUp                          controllers.SignUpController.view
+POST        /signUp                          controllers.SignUpController.submit
 
-GET     /json                       controllers.TicTacToeScalaController.gameToJson
+GET         /signIn                          controllers.SignInController.view
+POST        /signIn                          controllers.SignInController.submit
 
-GET     /websocket                  controllers.TicTacToeScalaController.socket
+GET         /totp                            controllers.TotpController.view(userId: java.util.UUID, sharedKey: String, rememberMe: Boolean)
+GET         /enableTotp                      controllers.TotpController.enableTotp
+GET         /disableTotp                     controllers.TotpController.disableTotp
+POST        /totpSubmit                      controllers.TotpController.submit
+POST        /enableTotpSubmit                controllers.TotpController.enableTotpSubmit
 
-POST    /isLoggedIn                 controllers.TicTacToeScalaController.isLoggedIn
+GET         /totpRecovery                    controllers.TotpRecoveryController.view(userID: java.util.UUID, sharedKey: String, rememberMe: Boolean)
+POST        /totpRecoverySubmit              controllers.TotpRecoveryController.submit
 
+GET         /password/forgot                 controllers.ForgotPasswordController.view
+POST        /password/forgot                 controllers.ForgotPasswordController.submit
+GET         /password/reset/:token           controllers.ResetPasswordController.view(token: java.util.UUID)
+POST        /password/reset/:token           controllers.ResetPasswordController.submit(token: java.util.UUID)
+GET         /password/change                 controllers.ChangePasswordController.view
+POST        /password/change                 controllers.ChangePasswordController.submit
+
+GET         /account/email/:email            controllers.ActivateAccountController.send(email: String)
+GET         /account/activate/:token         controllers.ActivateAccountController.activate(token: java.util.UUID)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /myAssets/*file             controllers.Assets.versioned(path="/public/myAssets", file: Asset)
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /myAssets/*file                     controllers.Assets.versioned(path="/public/myAssets", file: Asset)
+GET     /assets/*file                       controllers.Assets.versioned(path="/public", file: Asset)
+GET     /favicon.ico                        controllers.Assets.at(path="/public/images", file="favicon.ico")
+->          /webjars                         webjars.Routes
 
-
-GET     /                           controllers.TicTacToeScalaController.vueIndex(name: String = null)
-GET     /*name                      controllers.TicTacToeScalaController.vueIndex(name: String)
+GET     /startGaming                           controllers.ApplicationController.vueIndex()
+GET     /gameOver                       controllers.ApplicationController.gameOver()

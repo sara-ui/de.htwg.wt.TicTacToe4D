@@ -1,0 +1,81 @@
+<game>
+    <turn>true</turn>
+    <players>
+        <player name="Miam" symbol="X"></player>
+        <player name="maschine" symbol="O"></player>
+    </players>
+    <grids>
+        <grid>
+            <cell row="0" col="0" value=""></cell>
+            <cell row="0" col="1" value=""></cell>
+            <cell row="0" col="2" value=""></cell>
+            <cell row="0" col="3" value=""></cell>
+            <cell row="1" col="0" value=""></cell>
+            <cell row="1" col="1" value=""></cell>
+            <cell row="1" col="2" value=""></cell>
+            <cell row="1" col="3" value=""></cell>
+            <cell row="2" col="0" value=""></cell>
+            <cell row="2" col="1" value=""></cell>
+            <cell row="2" col="2" value=""></cell>
+            <cell row="2" col="3" value=""></cell>
+            <cell row="3" col="0" value=""></cell>
+            <cell row="3" col="1" value=""></cell>
+            <cell row="3" col="2" value=""></cell>
+            <cell row="3" col="3" value=""></cell>
+        </grid>
+        <grid>
+            <cell row="0" col="0" value=""></cell>
+            <cell row="0" col="1" value=""></cell>
+            <cell row="0" col="2" value=""></cell>
+            <cell row="0" col="3" value=""></cell>
+            <cell row="1" col="0" value=""></cell>
+            <cell row="1" col="1" value=""></cell>
+            <cell row="1" col="2" value=""></cell>
+            <cell row="1" col="3" value=""></cell>
+            <cell row="2" col="0" value=""></cell>
+            <cell row="2" col="1" value=""></cell>
+            <cell row="2" col="2" value=""></cell>
+            <cell row="2" col="3" value=""></cell>
+            <cell row="3" col="0" value=""></cell>
+            <cell row="3" col="1" value=""></cell>
+            <cell row="3" col="2" value=""></cell>
+            <cell row="3" col="3" value=""></cell>
+        </grid>
+        <grid>
+            <cell row="0" col="0" value=""></cell>
+            <cell row="0" col="1" value=""></cell>
+            <cell row="0" col="2" value=""></cell>
+            <cell row="0" col="3" value=""></cell>
+            <cell row="1" col="0" value=""></cell>
+            <cell row="1" col="1" value=""></cell>
+            <cell row="1" col="2" value=""></cell>
+            <cell row="1" col="3" value=""></cell>
+            <cell row="2" col="0" value=""></cell>
+            <cell row="2" col="1" value=""></cell>
+            <cell row="2" col="2" value=""></cell>
+            <cell row="2" col="3" value=""></cell>
+            <cell row="3" col="0" value=""></cell>
+            <cell row="3" col="1" value=""></cell>
+            <cell row="3" col="2" value=""></cell>
+            <cell row="3" col="3" value=""></cell>
+        </grid>
+        <grid>
+            <cell row="0" col="0" value=""></cell>
+            <cell row="0" col="1" value=""></cell>
+            <cell row="0" col="2" value=""></cell>
+            <cell row="0" col="3" value=""></cell>
+            <cell row="1" col="0" value=""></cell>
+            <cell row="1" col="1" value=""></cell>
+            <cell row="1" col="2" value=""></cell>
+            <cell row="1" col="3" value=""></cell>
+            <cell row="2" col="0" value=""></cell>
+            <cell row="2" col="1" value=""></cell>
+            <cell row="2" col="2" value=""></cell>
+            <cell row="2" col="3" value=""></cell>
+            <cell row="3" col="0" value=""></cell>
+            <cell row="3" col="1" value=""></cell>
+            <cell row="3" col="2" value=""></cell>
+            <cell row="3" col="3" value=""></cell>
+        </grid>
+    </grids>
+</game>
