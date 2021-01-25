@@ -37,7 +37,7 @@ class SocialAuthController @Inject() (
             value <- authenticatorService.init(authenticator)
             result <- authenticatorService.embed(value, Redirect(routes.ApplicationController.vueIndex()))
           } yield {
-            controller.setPlayer(user.firstName.get)
+            //controller.setPlayer(user.firstName.get)
             eventBus.publish(LoginEvent(user, request))
             result
           }

@@ -6,7 +6,7 @@
           class="img-fluid text-white"
           height="60px"
           width="60px"
-          src="/assets/images/TicTacToe4D_Transparent.png"
+          src="/frontend/tictactoe-vue/public/img/TicTacToe4D_Transparent.png"
           alt="Home"
         />
         <span class="tooltiptext">Home</span>
@@ -45,6 +45,22 @@
       </div>
       <div class="my-auto"></div>
       <div
+          @click="about()"
+          class="mt-2 mb-4 mx-auto mytooltip"
+          @mouseenter="buttonAboutHover = true"
+          @mouseleave="buttonAboutHover = false"
+      >
+        <b-icon
+            class="text-white m-0 h2"
+            icon="info-circle"
+            :animation="buttonAboutHover ? 'throb' : null"
+        >
+        </b-icon>
+        <span class="tooltiptext">
+          About
+        </span>
+      </div>
+      <div
         @click="restart()"
         class="mt-2 mb-4 mx-auto mytooltip"
         @mouseenter="buttonRestartHover = true"
@@ -61,15 +77,31 @@
         </span>
       </div>
       <div
+          @click="reset()"
+          class="mt-2 mb-4 mx-auto mytooltip"
+          @mouseenter="buttonResetHover = true"
+          @mouseleave="buttonResetHover = false"
+      >
+        <b-icon
+            class="text-white m-0 h2"
+            icon="arrow-repeat"
+            :animation="buttonResetHover ? 'spin' : null"
+        >
+        </b-icon>
+        <span class="tooltiptext">
+          Reset
+        </span>
+      </div>
+      <div
         @click="logMeOut()"
         class="mt-2 mb-4 mx-auto mytooltip"
-        @mouseenter="buttonRestartHover = true"
-        @mouseleave="buttonRestartHover = false"
+        @mouseenter="buttonLogOutHover = true"
+        @mouseleave="buttonLogOutHover = false"
       >
         <b-icon
           class="text-white m-0 h2"
           icon="door-open"
-          :animation="buttonRestartHover ? 'throb' : null"
+          :animation="buttonLogOutHover ? 'throb' : null"
         >
         </b-icon>
         <span class="tooltiptext">
@@ -79,35 +111,19 @@
       <a
         href="/password/change"
         class="mt-2 mb-4 mx-auto mytooltip"
-        @mouseenter="buttonRestartHover = true"
-        @mouseleave="buttonRestartHover = false"
+        @mouseenter="buttonPWHover = true"
+        @mouseleave="buttonPWHover = false"
       >
         <b-icon
           class="text-white m-0 h2"
           icon="tools"
-          :animation="buttonRestartHover ? 'throb' : null"
+          :animation="buttonPWHover ? 'throb' : null"
         >
         </b-icon>
         <span class="tooltiptext">
           Change Password
         </span>
       </a>
-      <!--<div
-        @click="reset()"
-        class="mt-2 mb-4 mx-auto mytooltip"
-        @mouseenter="buttonResetHover = true"
-        @mouseleave="buttonResetHover = false"
-      >
-        <b-icon
-          class="text-white m-0 h2"
-          icon="arrow-repeat"
-          :animation="buttonResetHover ? 'spin' : null"
-        >
-        </b-icon>
-        <span class="tooltiptext">
-          Reset
-        </span>
-      </div>-->
     </div>
   </div>
 </template>
@@ -124,7 +140,9 @@ export default {
     buttonUndoHover: false,
     buttonRedoHover: false,
     buttonRestartHover: false,
-    buttonResetHover: false
+    buttonResetHover: false,
+    buttonLogOutHover: false,
+    buttonPWHover: false
   }),
   methods: {
     ...mapActions(["setGame", "logout"]),
@@ -142,7 +160,7 @@ export default {
       });
     },
     about() {
-      window.location.href = "/about";
+      this.$router.push({ name: "About" });
     },
     restart() {
       axios.get("/restart").then(({ data }) => {
@@ -152,12 +170,12 @@ export default {
     reset() {
       axios.get("/reset").then(({ data }) => {
         this.logout();
+        this.$router.push({ name: "Login" });
       });
     },
     logMeOut() {
       axios.get("/signOut").then(({ data }) => {
         window.location.href = "/";
-
       });
     }
   }

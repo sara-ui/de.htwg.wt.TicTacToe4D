@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div id="status"></div>
+    <div class="statusMessage">
+      <div id="status" class="alert alert-info" role="alert"></div>
+    </div>
     <div id="game" class="w-100 h-100"></div>
   </div>
 </template>
@@ -556,5 +558,8 @@ canvas {
 }
 #status {
   padding-left: 80px;
+}
+.statusMessage {
+  margin-left: 160px;
 }
 </style>
