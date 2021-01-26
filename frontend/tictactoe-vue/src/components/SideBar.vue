@@ -6,7 +6,7 @@
           class="img-fluid text-white"
           height="60px"
           width="60px"
-          src="/frontend/tictactoe-vue/public/img/TicTacToe4D_Transparent.png"
+          src="/myAssets/img/TicTacToe4D_Transparent.png"
           alt="Home"
         />
         <span class="tooltiptext">Home</span>

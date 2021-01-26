@@ -5,13 +5,13 @@
     "Play",
     "Silhouette"
   ],
-  "website": "https://github.com/mohiva/play-silhouette-seed",
-  "repository": "https://github.com/mohiva/play-silhouette-seed",
+  "website": "https://github.com/sara-ui/de.htwg.wt.TicTacToe4D",
+  "repository": "https://github.com/sara-ui/de.htwg.wt.TicTacToe4D",
   "success_url": "/",
   "env": {
     "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-scala.git",
     "PLAY_CONF_FILE": "application.prod.conf",
-    "PLAY_APP_SECRET": "changeme",
+    "PLAY_APP_SECRET": "QCY?tAnfk?aZ?iwrNwnxIlR6CTf:G3gf:90Latabg@5241AB`R5W:1uDFN];Ik@n",
     "FACEBOOK_CLIENT_ID": {
       "description": "The Facebook OAuth2 client ID",
       "required": false

@@ -20,7 +20,7 @@
           <p style="line-height: 1.5; color: black">
             The following image shows a typical tic tac toe game:
             <br />
-            <img style="margin-top: 12px" src="/frontend/tictactoe-vue/public/img/tictactoe.png" />
+            <img style="margin-top: 12px" src="/myAssets/img/tictactoe.png" />
           </p>
         </div>
         <div class="row justify-content-center">
@@ -45,7 +45,7 @@
             <br />
             <img
               style="margin-top: 12px; width: 100%"
-              src="/frontend/tictactoe-vue/public/img/tictactoe4d.jpg"
+              src="/myAssets/img/tictactoe4d.jpg"
             />
           </p>
         </div>
