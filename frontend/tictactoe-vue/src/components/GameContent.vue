@@ -487,7 +487,7 @@ export default {
         }
 
         function connectWebSocket(s) {
-          webSocket = new WebSocket("ws://localhost:9000/websocket");
+          webSocket = new WebSocket("ws://tictactoe4d.herokuapp.com/websocket");
           console.info("Connecting to WebSocket...");
 
           webSocket.onopen = () => {
