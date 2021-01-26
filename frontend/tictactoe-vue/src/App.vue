@@ -104,8 +104,8 @@ export default {
           ") rotate(" +
           $this.randomNumber(-360, 360) +
           "deg)",
-        top: $this.wh,
-        left: $this.randomNumber(-60, $this.ww + 60)
+        top: $this.wh - 80,
+        left: $this.randomNumber(100, $this.ww - 100)
       });
       bubbleStyle.appendTo($this.object);
       bubbleStyle.animate(
