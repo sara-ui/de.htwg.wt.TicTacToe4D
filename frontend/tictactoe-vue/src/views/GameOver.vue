@@ -15,18 +15,27 @@
 
 <script>
 import axios from "axios";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "GameOver",
+  computed: {
+    ...mapGetters([
+        'players',
+        'game'
+    ])
+  },
   methods: {
     ...mapActions(["setGame", "logout"]),
     restart() {
       axios.get("/restart").then(({ data }) => {
+        this.setGame(data);
+        this.$router.push({ name: "Game" });
       });
     },
     reset() {
       axios.get("/signOut").then(({ data }) => {
+        window.location.href = "/";
       });
     }
   }

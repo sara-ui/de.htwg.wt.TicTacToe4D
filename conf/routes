@@ -13,7 +13,12 @@ GET     /undo                       controllers.ApplicationController.undo
 
 GET    /restart                    controllers.ApplicationController.restart
 
+GET    /reset                    controllers.ApplicationController.reset
+
 GET     /json                       controllers.ApplicationController.gameToJson
+
++ nocsrf
+POST     /players                       controllers.ApplicationController.players
 
 GET     /websocket                  controllers.ApplicationController.socket
 
@@ -54,5 +59,6 @@ GET     /assets/*file                       controllers.Assets.versioned(path="/
 GET     /favicon.ico                        controllers.Assets.at(path="/public/images", file="favicon.ico")
 ->          /webjars                         webjars.Routes
 
+GET     /login                           controllers.ApplicationController.vueIndex()
 GET     /startGaming                           controllers.ApplicationController.vueIndex()
 GET     /gameOver                       controllers.ApplicationController.gameOver()

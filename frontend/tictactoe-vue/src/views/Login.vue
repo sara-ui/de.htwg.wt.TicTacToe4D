@@ -6,7 +6,7 @@
           <div class="text-center mb-4">
             <img
               class="img-fluid mb-4"
-              src="/assets/images/TicTacToe4D_Transparent.png"
+              src="/frontend/tictactoe-vue/public/img/TicTacToe4D_Transparent.png"
               alt="TicTacToe4D"
             />
             <h2 class="h3 mb-3 font-weight-normal">TicTacToe 4D</h2>
@@ -33,6 +33,7 @@ export default {
   methods: {
     submit() {
       this.login(this.payload);
+      this.$router.push({ name: "Game" });
     },
     ...mapActions(["login"])
   }

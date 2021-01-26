@@ -31,16 +31,17 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" href="@controllers.routes.ApplicationController.index">Silhouette Seed Template</a>
+                <a class="navbar-brand" href="@controllers.routes.ApplicationController.index">Tic Tac Toe 4D</a>
 
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
+                        <a class="nav-item nav-link" href="@controllers.routes.ApplicationController.vueIndex()">Play</a>
                         <a class="nav-item nav-link" href="@controllers.routes.ApplicationController.index">@messages("home")</a>
-                        <a class="nav-item nav-link" href="https://github.com/mohiva/play-silhouette-seed">GitHub</a>
+                        <a class="nav-item nav-link" href="https://github.com/sara-ui/de.htwg.wt.TicTacToe4D">GitHub</a>
                     </div>
                 </div>
 
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup2">
+                <div class="collapse navbar-collapse navbar-right" id="navbarNavAltMarkup2">
                     <div class="navbar-nav">
                         @user.map { u =>
                         <a class="nav-link" href="@controllers.routes.ApplicationController.index">@u.name</a>
@@ -58,7 +59,7 @@
             </nav>
         </header>
         <main class="container">
-            <div class="starter-template row">
+            <div class="starter-template row justify-content-center">
                 @request.flash.get("error").map { msg =>
                     <div class="col-md-6 col-md-offset-3 alert alert-danger">
                         <a href="#" class="close" data-dismiss="alert">&times;</a>
@@ -86,3 +87,126 @@
         <script @{CSPNonce.attr} src="@assets.path("javascripts/zxcvbnShim.js")"></script>
     </body>
 </html>
+<style>
+body {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+}
+.navbar-right {
+    justify-content: flex-end;
+}
+</style>
+<script>
+    let background = {};
+
+    background.initializr = function() {
+        let $this = this;
+
+        //option
+        $this.id = "background";
+        $this.bubbles_number = 25;
+        $this.speed = [1500, 10000];
+        $this.max_bubbles_height = $this.height;
+        $this.shape = false; // 1: O, 2: X
+
+        if ($("#" + $this.id).length > 0) {
+            $("#" + $this.id).remove();
+        }
+        $this.object = $(
+                "<div" +
+                " class='m-0 d-flex'" +
+                " style=" +
+                " overflow:hidden;" +
+                " id='" +
+                $this.id +
+                "'>" +
+                " </div>'"
+        ).appendTo("body");
+
+        $this.ww = $(window).width();
+        $this.wh = $(window).height();
+
+        $("body").prepend(
+                "<style>.shape__background__O {" +
+                "z-index: -1;" +
+                "transform-origin:center;" +
+                "width:80px;" +
+                "height:80px;" +
+                "position: absolute}" +
+                "</style>" +
+                "<style>.shape__background__X {" +
+                "z-index: -1;" +
+                "transform-origin:center;" +
+                "width:80px;" +
+                "height:80px;" +
+                "position: absolute}" +
+                "</style>"
+        );
+
+        for (let i = 0; i < this.bubbles_number; i++) {
+            $this.generate_bubbles();
+        }
+    };
+
+    background.generate_bubbles = function() {
+        let $this = this;
+        let bubbleStyle;
+        let baseO = $("<div class='shape__background__O'></div>");
+        let baseX = $("<div class='shape__background__X'> X </div>");
+        let shape_type = $this.shape ? $this.shape : this.randomNumber(1, 2);
+        if (shape_type === 1) {
+            bubbleStyle = baseO.css({
+                border: this.randomNumber(1, 4) + "px solid lightblue",
+                borderRadius: "50%"
+            });
+        } else {
+            bubbleStyle = baseX.css({
+                backgroundColor: "inherit",
+                color: "lightblue",
+                fontSize: this.randomNumber(30, 100) + "px"
+            });
+        }
+
+        let rn_size = $this.randomNumber(0.8, 1.2);
+        bubbleStyle.css({
+            transform:
+                    "scale(" +
+                    rn_size +
+                    ") rotate(" +
+                    $this.randomNumber(-360, 360) +
+                    "deg)",
+            top: $this.wh,
+            left: $this.randomNumber(-60, $this.ww + 60)
+        });
+        bubbleStyle.appendTo($this.object);
+        bubbleStyle.animate(
+                {
+                    top: $this.randomNumber($this.wh / 4, $this.wh / 4 - 60),
+                    transform:
+                            "scale(" +
+                            rn_size +
+                            ") rotate(" +
+                            $this.randomNumber(-360, 360) +
+                            "deg)",
+                    opacity: 0
+                },
+                $this.randomNumber($this.speed[0], $this.speed[1]),
+                function() {
+                    $(this).remove();
+                    $this.generate_bubbles();
+                }
+        );
+    };
+
+    background.randomNumber = function(from, to, arr) {
+        if (arr) {
+            return Math.random() * (to - from + 1) + from;
+        } else {
+            return Math.floor(Math.random() * (to - from + 1) + from);
+        }
+    };
+    background.initializr();
+</script>

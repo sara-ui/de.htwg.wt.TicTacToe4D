@@ -10,7 +10,7 @@ import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import de.htwg.se.ticTacToe3D.TicTacToe
 import de.htwg.se.ticTacToe3D.util.Observer
 import org.webjars.play.WebJarsUtil
-import play.api.libs.json.Json
+import play.api.libs.json.{ JsValue, Json }
 import play.api.libs.streams.ActorFlow
 import play.api.mvc._
 import utils.auth.DefaultEnv
@@ -42,8 +42,24 @@ class ApplicationController @Inject() (
     Future.successful(Ok(views.html.vueIndex()))
   }
 
+  /*
   def setPlayer(firstName: String) = {
     controller.setPlayers(firstName, "maschine")
+  }
+
+   */
+
+  def players = Action(parse.json) {
+    playersRequest: Request[JsValue] =>
+      {
+        val player1 = (playersRequest.body \ "player1").as[String]
+        val player2 = (playersRequest.body \ "player2").as[String]
+        controller.setPlayers(player1, player2)
+        Ok(Json.obj(
+          "statusMessage" -> controller.statusMessage,
+          "gridArray" -> createGameArrays
+        ))
+      }
   }
 
   /*def setPlayer(user) = {
@@ -77,6 +93,14 @@ class ApplicationController @Inject() (
     Future.successful(Ok(Json.obj(
       "statusMessage" -> controller.statusMessage,
       "gridArray" -> createGameArrays
+    )))
+  }
+
+  def reset = silhouette.SecuredAction.async { implicit request: SecuredRequest[DefaultEnv, AnyContent] =>
+    controller.reset
+    Future.successful(Ok(Json.obj(
+      "statusMessage" -> controller.statusMessage,
+      "gridArray" -> ""
     )))
   }
 
