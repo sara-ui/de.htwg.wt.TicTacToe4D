@@ -556,10 +556,4 @@ canvas {
   left: 80px;
   right: 0;
 }
-#status {
-  padding-left: 80px;
-}
-.statusMessage {
-  margin-left: 160px;
-}
 </style>
