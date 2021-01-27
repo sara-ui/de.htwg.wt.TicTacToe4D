@@ -230,4 +230,16 @@ export default {
     }
   }
 }
+@media (max-width: 670px) {
+  .sideBar {
+      position: absolute;
+      left: -60px;
+      z-index: 999;
+      transition: left 1s;
+      &:hover {
+        left: 0;
+      }
+    }
+}
+
 </style>
