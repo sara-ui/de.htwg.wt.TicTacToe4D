@@ -1,7 +1,7 @@
 <template>
   <div class="h-100 p-0 m-0 d-flex">
     <SideBar></SideBar>
-    <div class="content" style="width: calc(100% - 80px)">
+    <div class="content" style="width: 100%;padding-left: 80px">
       <GameContent></GameContent>
     </div>
   </div>
