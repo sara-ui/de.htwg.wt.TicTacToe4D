@@ -230,6 +230,7 @@ export default {
     }
   }
 }
+/*
 @media (max-width: 670px) {
   .sideBar {
       position: absolute;
@@ -240,6 +241,6 @@ export default {
         left: 0;
       }
     }
-}
+}*/
 
 </style>
